@@ -3,8 +3,10 @@ package tj.tajsoft.loyalrsn.presintation.main
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.core.view.forEachIndexed
 import androidx.core.view.isVisible
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
@@ -12,17 +14,17 @@ import dagger.hilt.android.AndroidEntryPoint
 import tajsoft.demoproject.myapplication.presintation.main.BottomNavigationVisibilityListener
 import tj.tajsoft.loyalrsn.R
 import tj.tajsoft.loyalrsn.databinding.ActivityMainBinding
+import tj.tajsoft.loyalrsn.domain.model.Destination
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), BottomNavigationVisibilityListener {
     private lateinit var binding: ActivityMainBinding
     private val navController get() = (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment).navController
-
+    private val viewModel by viewModels<MainViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         binding.apply {
             navigation.setupWithNavController(navController)
@@ -43,7 +45,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationVisibilityListener {
                         R.id.checkNumberFragment,
                         R.id.otpFragment,
                         R.id.registerOneFragment,
-                        R.id.registerTwoFragment
+                        R.id.registerTwoFragment,
+                        R.id.logInFragment
                     ).all {
                         it != destination.id
                     }

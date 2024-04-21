@@ -67,7 +67,14 @@ class OtpFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
 
                 if (s?.length == 4 && numberOtp == s.toString()) {
-                    findNavController().navigate(OtpFragmentDirections.toRegisterOneFragment())
+                    viewModel.hasUserId.observe(viewLifecycleOwner){
+                        if (it == false){
+                            findNavController().navigate(OtpFragmentDirections.toRegisterOneFragment())
+                        }else{
+                            findNavController().navigate(OtpFragmentDirections.toLogInFragment())
+                        }
+                    }
+
                 }
 
                 if (s?.length == 4 && numberOtp != s.toString()) {
@@ -90,8 +97,13 @@ class OtpFragment : Fragment() {
                         try {
                             if (massage.length == 4) {
                                 binding.pinView.setText(massage)
-                                findNavController().navigate(OtpFragmentDirections.toRegisterOneFragment())
-
+                                viewModel.hasUserId.observe(viewLifecycleOwner) {
+                                    if (it == false) {
+                                        findNavController().navigate(OtpFragmentDirections.toRegisterOneFragment())
+                                    } else {
+                                        findNavController().navigate(OtpFragmentDirections.toLogInFragment())
+                                    }
+                                }
                             } else {
                                 Toast.makeText(
                                     requireContext(),

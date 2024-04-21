@@ -27,6 +27,7 @@ class RegisterViewModel @Inject constructor(
             loading.postValue(true)
             try {
                 val phone_number = numberStore.get()
+                registerRepo.savePassword(password)
                 Log.d("phone_number", "register:${numberStore.get()} ")
                val _response =  registerRepo.register(name, phone_number.toString(), phone_number.toString(), car_number, email, birthday, gender,password,city, push_token)
                 response.postValue(_response)
@@ -36,5 +37,6 @@ class RegisterViewModel @Inject constructor(
                 loading.postValue(false)
             }
     }
+
 
 }

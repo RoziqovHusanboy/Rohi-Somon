@@ -1,11 +1,18 @@
 package tj.tajsoft.loyalrsn.data.remote.repo
 
 import android.util.Log
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.launch
 import tj.tajsoft.loyalrsn.data.local.NumberStore
 import tj.tajsoft.loyalrsn.data.local.OtpNumber
+import tj.tajsoft.loyalrsn.data.local.PasswordStore
 import tj.tajsoft.loyalrsn.data.local.UserIdStore
 import tj.tajsoft.loyalrsn.data.remote.api.auth.RegisterApi
 import tj.tajsoft.loyalrsn.data.remote.model.auth.RegisterResponse
+import tj.tajsoft.loyalrsn.domain.model.Destination
 import tj.tajsoft.loyalrsn.domain.repo.RegisterRepo
 import javax.inject.Inject
 
@@ -13,7 +20,8 @@ class RegisterRepoImpl @Inject constructor(
     private val registerApi: RegisterApi,
     private val userIdStore: UserIdStore,
     private val numberStore: NumberStore,
-    private val otpNumber: OtpNumber
+    private val otpNumber: OtpNumber,
+    private val passwordStore: PasswordStore
  ) : RegisterRepo {
      override suspend fun register(
         name: String,
@@ -43,6 +51,39 @@ class RegisterRepoImpl @Inject constructor(
           otpNumber.set(message)
         Log.d("saveOtpNumber", "saveOtpNumber: ${otpNumber.get()}")
     }
+
+    override suspend fun savePassword(password: String)  = passwordStore.set(password)
+
+    override suspend fun destinationFlow() = channelFlow {
+
+        suspend fun sendDestination(){
+            when{
+                userIdStore.get() !=null && numberStore.get()!=null->send(Destination.LogIn)
+                else -> send(Destination.Auth)
+            }
+            launch {
+                userIdStore.getFlow().collectLatest {
+                    sendDestination()
+                }
+                numberStore.getFlow().collectLatest {
+                    sendDestination()
+                }
+            }
+
+        }
+    }.distinctUntilChanged()
+
+    override suspend fun hasPhoneNumber() :Boolean{
+      return numberStore.get()!=null && passwordStore.get() !=null
+
+    }
+
+    override suspend fun hasUserID(): Boolean {
+        return userIdStore.get()!=null
+    }
+
+    override suspend fun getPassword()  = passwordStore.get()
+
 
     private suspend fun saveToStore(response:Int){
         userIdStore.set(response)

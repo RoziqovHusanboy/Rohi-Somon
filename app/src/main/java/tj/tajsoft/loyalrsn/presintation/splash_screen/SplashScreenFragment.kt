@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import tj.tajsoft.loyalrsn.databinding.SplashScreenBinding
@@ -13,6 +14,7 @@ import tj.tajsoft.loyalrsn.databinding.SplashScreenBinding
 @AndroidEntryPoint
 class SplashScreenFragment : Fragment() {
     private lateinit var binding: SplashScreenBinding
+    private val viewModel by viewModels<SplashScreenViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,7 +29,14 @@ class SplashScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         android.os.Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToLogInFragment())
+            viewModel.hasNumber.observe(viewLifecycleOwner){
+                if (it == false){
+                    findNavController().navigate(SplashScreenFragmentDirections.toCheckNumberFragment())
+                }else{
+                    findNavController().navigate(SplashScreenFragmentDirections.toLogInFragment())
+                }
+            }
+
         },2000)
     }
 }
