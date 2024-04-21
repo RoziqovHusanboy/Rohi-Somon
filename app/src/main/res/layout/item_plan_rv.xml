@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+     >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="A91"
+        android:layout_marginTop="3dp"
+         android:textSize="16sp"
+        android:id="@+id/textViewVidToplivo"
+        android:layout_marginStart="15dp"
+         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/textViewVidToplivo"
+        app:layout_constraintStart_toEndOf="@id/textViewVidToplivo"
+        app:layout_constraintBottom_toBottomOf="@id/textViewVidToplivo"
+        android:text="1.2"
+        android:textSize="16sp"
+        android:id="@+id/textViewLitr"
+        app:layout_constraintEnd_toStartOf="@id/textViewSumma"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/textViewVidToplivo"
+        app:layout_constraintStart_toEndOf="@id/textViewLitr"
+        app:layout_constraintBottom_toBottomOf="@id/textViewVidToplivo"
+        android:text="19"
+        android:textSize="16sp"
+        android:id="@+id/textViewSumma"
+        app:layout_constraintEnd_toStartOf="@id/textViewBonus"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/textViewVidToplivo"
+         app:layout_constraintBottom_toBottomOf="@id/textViewVidToplivo"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="14"
+        android:textSize="16sp"
+        android:id="@+id/textViewBonus"
+        android:textColor="#4CAF50"
+        android:textStyle="bold"
+        android:layout_marginEnd="20dp"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

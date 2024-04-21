@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:top="-2dp" android:right="-2dp" android:left="-2dp">
+        <shape android:shape="rectangle">
+             <solid android:color="#23325C" /> <!-- Background color of the ConstraintLayout -->
+            <stroke
+                android:width="2dp"
+                android:color="@color/black" /> <!-- Border color -->
+        </shape>
+    </item>
+</layer-list>

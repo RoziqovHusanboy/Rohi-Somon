@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/bottom_ic_home"
+        android:title="home" />
+    <item
+        android:id="@+id/gasstationFragment"
+        android:icon="@drawable/bottom_ic_gasstation"
+        android:title="gasstation" />
+    <item
+        android:id="@+id/discountFragment"
+        android:icon="@drawable/bottom_ic_discountshape"
+        android:title="discount" />
+    <item
+        android:id="@+id/moreFragment"
+        android:icon="@drawable/bottom_ic_more"
+        android:title="more" />
+
+</menu>

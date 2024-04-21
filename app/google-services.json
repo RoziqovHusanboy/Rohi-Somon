@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "308229170928",
+    "project_id": "rohi-somon-235da",
+    "storage_bucket": "rohi-somon-235da.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308229170928:android:87c1836bd74a61d1134435",
+        "android_client_info": {
+          "package_name": "tj.tajsoft.loyalrsn"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy3e6HcoEcI5CTc4EwXD8Sn6eg196o5U4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="13dp"
+        android:src="@drawable/fragment_register_ic_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewStep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="26dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Шаг 1"
+        android:textColor="#D4D4D5"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/layoutName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="26dp"
+        android:layout_marginTop="25dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/imageViewLogo">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Имя*"
+            android:textColor="#23325C"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/edittextName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/fragment_register_edittext_background"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="Введите имя"
+            android:paddingLeft="12dp"
+            android:textColor="@color/black"
+            android:textColorHint="#D4D4D5"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutSecondName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="26dp"
+        android:layout_marginTop="25dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/layoutName">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Фамилия*"
+            android:textColor="#23325C"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/edittextSecondName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/fragment_register_edittext_background"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="Введите фамилию"
+            android:paddingLeft="12dp"
+            android:textColor="@color/black"
+            android:textColorHint="#D4D4D5"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/layoutThirdName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="26dp"
+        android:layout_marginTop="25dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/layoutSecondName">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Отчество"
+            android:textColor="#23325C"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/edittextThirdName"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/fragment_register_edittext_background"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="Введите отчество"
+            android:paddingLeft="12dp"
+            android:textColor="@color/black"
+            android:textColorHint="#D4D4D5"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutBirth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="26dp"
+        android:layout_marginTop="25dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/layoutThirdName">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Дата рождения*"
+            android:textColor="#23325C"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/edittextBirth"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/fragment_register_edittext_background"
+            android:clickable="false"
+            android:focusable="false"
+            android:fontFamily="@font/montserrat_medium"
+            android:hint="Укажите дату рождения"
+            android:paddingLeft="12dp"
+            android:textColor="@color/black"
+            android:textColorHint="#D4D4D5"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageViewCalendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="15dp"
+        android:padding="8dp"
+        android:src="@drawable/fragment_register_one_birth_calendar"
+        app:layout_constraintEnd_toEndOf="@id/layoutBirth"
+        app:layout_constraintTop_toTopOf="@id/layoutBirth" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonNext"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="26dp"
+        android:layout_marginBottom="50dp"
+        android:background="@color/button_back"
+        android:text="Далее"
+        android:textAllCaps="false"
+        android:textColor="#BDBDBD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
