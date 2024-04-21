@@ -126,6 +126,8 @@
                 android:fontFamily="@font/montserrat_medium"
                 android:hint="Введите пароль"
                 android:paddingLeft="12dp"
+                android:inputType="number"
+                android:maxLength="4"
                 android:textColor="@color/black"
                 android:textColorHint="#D4D4D5"
                 android:textSize="14sp" />
