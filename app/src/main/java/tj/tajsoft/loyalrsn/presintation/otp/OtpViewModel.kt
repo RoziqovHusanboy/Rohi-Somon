@@ -1,5 +1,6 @@
 package tj.tajsoft.loyalrsn.presintation.otp
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
  import tj.tajsoft.loyalrsn.data.local.OtpNumber
+import tj.tajsoft.loyalrsn.data.remote.model.auth.ResponseFindUsername
 import tj.tajsoft.loyalrsn.domain.repo.RegisterRepo
 import javax.inject.Inject
 
@@ -16,12 +18,34 @@ class OtpViewModel @Inject constructor(
     private val repo: RegisterRepo
 ) : ViewModel() {
     var numberOtp =String()
-    val hasUserId = MutableLiveData<Boolean>(false)
+     val responseFindUser = MutableLiveData<ResponseFindUsername>()
 
     init {
         checkOtpNumber()
-        hasUserId()
+
     }
+
+    fun findUserByUsername(username:String) = viewModelScope.launch{
+        try {
+            val result = repo.findUserByUsername("+992$username")
+            Log.d("TAG", "findUserByUsername:+992$username")
+            responseFindUser.postValue(result)
+            Log.d("findUserByUsername", "findUserByUsername:${result.id} ")
+
+        }catch (e:Exception){
+            Log.d("findUserByUsername", "findUserByUsername:$e ")
+        }
+    }
+    fun saveNumber(number: Int) = viewModelScope.launch {
+        try {
+            repo.saveNumber(number)
+            Log.d("saveNumber", "saveNumber: saved number")
+        }catch (e:Exception){
+            Log.d("saveNumber", "saveNumber: $e")
+        }
+    }
+
+
 
     private fun checkOtpNumber() = viewModelScope.launch {
         try {
@@ -33,14 +57,6 @@ class OtpViewModel @Inject constructor(
         }
     }
 
-    private fun hasUserId() = viewModelScope.launch{
-        try {
-            val result = repo.hasUserID()
-            hasUserId.postValue(result)
-        }catch (e:Exception){
-            Log.d("ExceptionHasUserId", "hasUserId:$e ")
-        }
 
-    }
 
 }

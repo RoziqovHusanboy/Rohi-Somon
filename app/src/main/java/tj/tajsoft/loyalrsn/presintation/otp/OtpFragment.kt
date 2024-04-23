@@ -28,6 +28,8 @@ import tj.tajsoft.loyalrsn.databinding.FragmentOtpBinding
 class OtpFragment : Fragment() {
     private lateinit var binding: FragmentOtpBinding
     private val viewModel by viewModels<OtpViewModel>()
+    private var phoneNumber: String? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,7 +45,7 @@ class OtpFragment : Fragment() {
 
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
-                android.Manifest.permission.RECEIVE_SMS
+                Manifest.permission.RECEIVE_SMS
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
@@ -54,8 +56,13 @@ class OtpFragment : Fragment() {
         } else {
             receiveMsg()
         }
-
+        arguments.let {
+            phoneNumber = it!!.getString("number")
+        }
+        viewModel.findUserByUsername(phoneNumber.toString())
+        viewModel.saveNumber(phoneNumber!!.toInt())
         checkOtpNumber()
+
 
     }
 
@@ -67,20 +74,22 @@ class OtpFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
 
                 if (s?.length == 4 && numberOtp == s.toString()) {
-                    viewModel.hasUserId.observe(viewLifecycleOwner){
-                        if (it == false){
+                      viewModel.responseFindUser.observe(viewLifecycleOwner) { responseUser ->
+                        Log.d("afterTextChanged", "afterTextChanged:${responseUser.found} ")
+                        if (!responseUser.found) {
                             findNavController().navigate(OtpFragmentDirections.toRegisterOneFragment())
-                        }else{
+                        } else {
                             findNavController().navigate(OtpFragmentDirections.toLogInFragment())
                         }
                     }
-
                 }
+
 
                 if (s?.length == 4 && numberOtp != s.toString()) {
                     context?.getColor(R.color.red)?.let { it1 -> binding.pinView.setLineColor(it1) }
                     binding.pinView.setTextColor(requireContext().getColor(R.color.red))
-                    Toast.makeText(requireContext(), "Не провильно ввели код", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Не провильно ввели код", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         })
@@ -97,8 +106,9 @@ class OtpFragment : Fragment() {
                         try {
                             if (massage.length == 4) {
                                 binding.pinView.setText(massage)
-                                viewModel.hasUserId.observe(viewLifecycleOwner) {
-                                    if (it == false) {
+                                viewModel.responseFindUser.observe(viewLifecycleOwner) { responseUser ->
+                                    Log.d("afterTextChanged", "afterTextChanged:${responseUser.found} ")
+                                    if (!responseUser.found) {
                                         findNavController().navigate(OtpFragmentDirections.toRegisterOneFragment())
                                     } else {
                                         findNavController().navigate(OtpFragmentDirections.toLogInFragment())
@@ -124,5 +134,7 @@ class OtpFragment : Fragment() {
             IntentFilter("android.provider.Telephony.SMS_RECEIVED")
         )
     }
+
+
 }
 

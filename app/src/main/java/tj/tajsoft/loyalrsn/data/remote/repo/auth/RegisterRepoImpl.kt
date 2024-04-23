@@ -1,27 +1,33 @@
-package tj.tajsoft.loyalrsn.data.remote.repo
+package tj.tajsoft.loyalrsn.data.remote.repo.auth
 
 import android.util.Log
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
+import retrofit2.Call
 import tj.tajsoft.loyalrsn.data.local.NumberStore
 import tj.tajsoft.loyalrsn.data.local.OtpNumber
 import tj.tajsoft.loyalrsn.data.local.PasswordStore
+import tj.tajsoft.loyalrsn.data.local.TokenStore
 import tj.tajsoft.loyalrsn.data.local.UserIdStore
 import tj.tajsoft.loyalrsn.data.remote.api.auth.RegisterApi
+import tj.tajsoft.loyalrsn.data.remote.model.auth.LogInModel
+import tj.tajsoft.loyalrsn.data.remote.model.auth.LogInResponse
 import tj.tajsoft.loyalrsn.data.remote.model.auth.RegisterResponse
+import tj.tajsoft.loyalrsn.data.remote.model.auth.ResponseFindUsername
+import tj.tajsoft.loyalrsn.data.remote.model.product.ResponseUser
 import tj.tajsoft.loyalrsn.domain.model.Destination
 import tj.tajsoft.loyalrsn.domain.repo.RegisterRepo
 import javax.inject.Inject
-
 class RegisterRepoImpl @Inject constructor(
     private val registerApi: RegisterApi,
     private val userIdStore: UserIdStore,
     private val numberStore: NumberStore,
     private val otpNumber: OtpNumber,
-    private val passwordStore: PasswordStore
+    private val passwordStore: PasswordStore,
+    private val tokenStore: TokenStore
  ) : RegisterRepo {
      override suspend fun register(
         name: String,
@@ -36,7 +42,7 @@ class RegisterRepoImpl @Inject constructor(
         push_token: String
     ): RegisterResponse {
          val response = registerApi.register(name, username, phone_number, car_number, email, birthday, gender, password, city, push_token)
-         saveToStore(response.userIdStore)
+         saveUserIdToStoreAfterRegister(response.userIdStore)
           return response
      }
 
@@ -53,29 +59,8 @@ class RegisterRepoImpl @Inject constructor(
     }
 
     override suspend fun savePassword(password: String)  = passwordStore.set(password)
-
-    override suspend fun destinationFlow() = channelFlow {
-
-        suspend fun sendDestination(){
-            when{
-                userIdStore.get() !=null && numberStore.get()!=null->send(Destination.LogIn)
-                else -> send(Destination.Auth)
-            }
-            launch {
-                userIdStore.getFlow().collectLatest {
-                    sendDestination()
-                }
-                numberStore.getFlow().collectLatest {
-                    sendDestination()
-                }
-            }
-
-        }
-    }.distinctUntilChanged()
-
     override suspend fun hasPhoneNumber() :Boolean{
-      return numberStore.get()!=null && passwordStore.get() !=null
-
+      return (numberStore.get()!=null)
     }
 
     override suspend fun hasUserID(): Boolean {
@@ -83,11 +68,40 @@ class RegisterRepoImpl @Inject constructor(
     }
 
     override suspend fun getPassword()  = passwordStore.get()
+    override suspend fun clearNumber() {
+        numberStore.clear()
+        Log.d("Clear", "clearNumber: ${numberStore.get()}")
+    }
+
+    override suspend fun findUserByUsername(username: String): ResponseFindUsername {
+        val response =  registerApi.findUserByUsername(username)
+        userIdStore.set(response.id)
+        Log.d("findUserByUsernameInRegister", "findUserByUsernameInRegister:${userIdStore.get()}")
+        return response
+    }
+
+    override suspend fun logInCheck(password: String): LogInResponse {
+        val userName = numberStore.get()
+        val request = LogInModel("+992$userName", password)
+        val response = registerApi.logInCheck(request)
+        tokenStore.set(response.token)
+        return response
+    }
+
+    override suspend fun getUser(): Call<ResponseUser> {
+        val userId = userIdStore.get()!!
+        val token = tokenStore.get()!!
+        Log.d("getUserFromProduct", "getUserFromProduct: ${tokenStore.get()}")
+        Log.d("getUserFromProduct", "getUserFromProduct: ${userIdStore.get()}")
+        val response = registerApi.getUser("Bearer $token",userId)
+        return response
+    }
 
 
-    private suspend fun saveToStore(response:Int){
+    private suspend fun saveUserIdToStoreAfterRegister(response:Int){
         userIdStore.set(response)
     }
 
 
 }
+

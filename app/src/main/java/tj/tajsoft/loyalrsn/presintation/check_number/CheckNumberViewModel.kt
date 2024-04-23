@@ -17,13 +17,7 @@ class CheckNumberViewModel @Inject constructor(
 ) : ViewModel() {
     val error= MutableLiveData(false)
 
-    fun saveNumber(number: Int) = viewModelScope.launch {
-        try {
-            registerRepo.saveNumber(number)
-        }catch (e:Exception){
-            Log.d("saveNumber", "saveNumber: $e")
-        }
-    }
+
 
     fun checkPhoneNumber(recipients: String) = viewModelScope.launch {
         val randomNumber = Random().nextInt(9000)+1000

@@ -16,28 +16,5 @@ class MainViewModel @Inject constructor(
     private val repo: RegisterRepo
 ) : ViewModel() {
 
-    val events =SingleLiveEvent<Event>()
-
-    init {
-
-    }
-
-    private fun getDestination() = viewModelScope.launch{
-        try {
-            repo.destinationFlow().collectLatest {
-                events.postValue(Event.NavigateTo(it))
-            }
-
-        }catch (e:Exception){
-            Log.d("Exception", "getDestination:$e ")
-        }
-
-
-    }
-
-
-    sealed class Event {
-        data class NavigateTo(val destination: Destination):Event()
-    }
 
 }

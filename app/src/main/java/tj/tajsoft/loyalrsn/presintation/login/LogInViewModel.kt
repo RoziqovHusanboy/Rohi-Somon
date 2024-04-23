@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import tj.tajsoft.loyalrsn.data.remote.model.auth.LogInResponse
 import tj.tajsoft.loyalrsn.domain.repo.RegisterRepo
 import javax.inject.Inject
 
@@ -13,18 +14,21 @@ import javax.inject.Inject
 class LogInViewModel @Inject constructor(
     private val repo: RegisterRepo
 ) : ViewModel() {
-val password = MutableLiveData<String>()
-    init {
-        checkPassword()
-    }
+    val responseLogIn = MutableLiveData<LogInResponse>()
+    val loading = MutableLiveData(false)
 
-    private fun checkPassword() = viewModelScope.launch {
-       try {
-          password.postValue( repo.getPassword())
-       }catch (e:Exception){
-           Log.d("ExceptionCheckPassword", "checkPassword:$e ")
-       }
 
+      fun checkLogIn(password: String) = viewModelScope.launch {
+          loading.postValue(true)
+        try {
+            val response = repo.logInCheck(password)
+            responseLogIn.postValue(response)
+            Log.d("TAG", "checkLogIn:${response.token} ")
+        } catch (e: Exception) {
+            Log.d("ExceptionCheckPassword", "checkPassword:$e ")
+        }finally {
+            loading.postValue(false)
+        }
     }
 
 }

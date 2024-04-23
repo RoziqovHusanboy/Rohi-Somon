@@ -30,19 +30,10 @@ class DiscountFragment : Fragment() {
     }
 
     private fun UI() = with(binding) {
-        recyclerview.adapter = DiscountAdapter(list(),::onClick)
+//        recyclerview.adapter = DiscountAdapter(list(),::onClick)
      }
 
-    fun list(): ArrayList<Int> {
-        val list = arrayListOf<Int>(
-            R.drawable.a1,
-            R.drawable.a2,
-            R.drawable.a4,
-            R.drawable.p2,
-            R.drawable.person1
-        )
-        return list
-    }
+
 
     fun onClick(){
         findNavController().navigate(DiscountFragmentDirections.actionDiscountFragmentToDetailDiscountFragment())

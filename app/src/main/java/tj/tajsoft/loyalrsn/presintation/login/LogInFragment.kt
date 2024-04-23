@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,7 +20,6 @@ import tj.tajsoft.loyalrsn.databinding.FragmentLoginBinding
 class LogInFragment : Fragment() {
     private lateinit var binding:FragmentLoginBinding
     private val viewModel by viewModels<LogInViewModel>()
-    private lateinit var password: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,19 +32,30 @@ class LogInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        password = String()
-        viewModel.password.observe(viewLifecycleOwner){
-            password = it
+
+
+        viewModel.loading.observe(viewLifecycleOwner){
+            binding.error.root.isVisible = it
+            binding.layoutLogIn.isVisible  =!it
         }
+
+         viewModel.responseLogIn.observe(viewLifecycleOwner){
+             if (it.token!=null){
+                 findNavController().navigate(LogInFragmentDirections.toHomeFragment())
+             }else{
+                 Toast.makeText(requireContext(), "Your password was un correct", Toast.LENGTH_SHORT).show()
+             }
+        }
+
 
         binding.pinView.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
-                if (s?.length == 4 && password == s.toString()){
-                    findNavController().navigate(LogInFragmentDirections.toHomeFragment())
+                if (s?.length == 4){
+                    viewModel.checkLogIn(s.toString())
                 }else{
-                    if (s?.length == 4 && password != s.toString()){
+                    if (s?.length == 4){
                     context?.getColor(R.color.red)?.let { it1 -> binding.pinView.setLineColor(it1) }
                     binding.pinView.setTextColor(requireContext().getColor(R.color.red))
                     Toast.makeText(requireContext(), "Не провильно ввели код", Toast.LENGTH_SHORT).show()
