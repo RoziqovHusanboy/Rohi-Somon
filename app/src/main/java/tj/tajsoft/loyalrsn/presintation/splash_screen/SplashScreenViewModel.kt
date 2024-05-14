@@ -22,7 +22,7 @@ class SplashScreenViewModel @Inject constructor (
         try {
             val result =  repo.hasPhoneNumber()
             hasNumber.postValue(result)
-        }catch (e:Exception){
+         }catch (e:Exception){
             Log.d("ExceptionHasNumber", "hasPhoneNumber:$e ")
         }
     }

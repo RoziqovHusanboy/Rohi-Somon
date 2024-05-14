@@ -6,13 +6,19 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +26,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-  import tajsoft.demoproject.myapplication.sharedPreference.SharedPreferences
+import tajsoft.demoproject.myapplication.sharedPreference.SharedPreferences
 import tj.tajsoft.loyalrsn.R
 import tj.tajsoft.loyalrsn.databinding.FragmentProfileBinding
 import java.io.ByteArrayOutputStream
@@ -31,6 +37,7 @@ class ProfileFragment : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
     private val PICK_IMAGE_REQUEST = 1
     private lateinit var binding: FragmentProfileBinding
+    private val viewModels by viewModels<ProfileViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +56,17 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModels.user.observe(viewLifecycleOwner) {
+            binding.numberPhone.text = it.data.phoneNumber
+            binding.nameFio.text = it.data.name
+            binding.nameLocation.text = it.data.city
+            binding.nameCar.text = it.data.carNumber
+            val birth = it.data.birthday.toString()
+            val birthDataOnly = birth.toString().substring(14, 24)
+            binding.nameBirth.text = birthDataOnly
+
+        }
 
         GlobalScope.launch {
             val storedBitmap = loadImageFromSharedPreferences()
@@ -84,6 +102,24 @@ class ProfileFragment : Fragment() {
     private fun openDialogEdit() {
         val dialog = BottomSheetDialog(requireContext())
         dialog.setContentView(R.layout.item_dialog_edit)
+        val carnumber = dialog.findViewById<EditText>(R.id.editTextCar)
+        val button = dialog.findViewById<Button>(R.id.buttonCarNumber)
+
+        carnumber?.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+                override fun afterTextChanged(s: Editable?) {
+                    if (s?.length == 7 || s?.length ==8) {
+                        button?.setOnClickListener {
+                            viewModels.updateCarNumber(s.toString())
+                            viewModels.responseCarNumber.observe(viewLifecycleOwner){ Toast.makeText(requireContext(), "${it.data}", Toast.LENGTH_SHORT).show() }
+                            dialog.dismiss()
+                            viewModels.getUser()
+                        }
+                    }
+                }
+
+            })
         dialog.show()
     }
 

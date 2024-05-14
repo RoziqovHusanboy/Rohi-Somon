@@ -52,12 +52,12 @@ class RegisterTwoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
          UI()
        subscribeToLiveData()
-    }
+     }
 
     private fun subscribeToLiveData() {
         viewModel.response.observe(viewLifecycleOwner){
             binding.error.root.isVisible =false
-            it.userIdStore?.let {
+            it.userId?.let {
                 findNavController().navigate(RegisterTwoFragmentDirections.actionRegisterTwoFragmentToHomeFragment())
             }
         }
@@ -119,8 +119,7 @@ class RegisterTwoFragment : Fragment() {
                     birthText,
                     checkedRadioButton!!,
                     binding.edittextPassword.text.toString(),
-                    binding.edittextCity.text.toString(),
-                    "push"
+                    binding.edittextCity.text.toString()
                 )
 
             }

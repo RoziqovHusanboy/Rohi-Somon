@@ -1,9 +1,13 @@
 package tj.tajsoft.loyalrsn.data.remote.api.auth
 
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
+import tj.tajsoft.loyalrsn.data.remote.model.auth.LogInModel
+import tj.tajsoft.loyalrsn.data.remote.model.auth.LogInResponse
 import tj.tajsoft.loyalrsn.data.remote.model.auth.RegisterResponse
+import tj.tajsoft.loyalrsn.data.remote.model.auth.ResponseFindUsername
 
 interface RegisterApi {
     @FormUrlEncoded
@@ -28,6 +32,12 @@ interface RegisterApi {
         @Field("recipients") recipients: String,
         @Field("message") message: String
     )
+    @FormUrlEncoded
+    @POST("find_user_by_username")
+    suspend fun findUserByUsername(@Field("username") username: String): ResponseFindUsername
+
+    @POST("login_check")
+    suspend fun logInCheck(@Body logInModel: LogInModel):LogInResponse
 
 
 }
