@@ -1,4 +1,4 @@
-package tj.tajsoft.loyalrsn.data.remote.model.product
+package tj.tajsoft.loyalrsn.data.remote.model.product.userActive
 
 
 import com.google.gson.annotations.SerializedName

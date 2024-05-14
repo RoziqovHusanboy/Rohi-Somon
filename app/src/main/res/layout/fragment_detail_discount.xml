@@ -1,79 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#23325C"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="#23325C">
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
+         android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintBack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/constraintBack"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/background_back"
-        >
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="Вернутся назад"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:id="@+id/titleBack"
-        android:layout_marginTop="18dp"
-        android:layout_marginStart="12dp"
-        app:layout_constraintStart_toEndOf="@id/back"
-        />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/back"
-        android:src="@drawable/ic_back"
-        app:layout_constraintTop_toTopOf="@id/titleBack"
-        app:layout_constraintBottom_toBottomOf="@id/titleBack"
-        android:layout_marginStart="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:padding="10dp"
-        />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/titleBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="18dp"
+            android:text="Вернутся назад"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/back"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="@id/titleBack"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/titleBack" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card"
-        android:layout_width="0dp"
-        android:layout_height="176dp"
-        app:layout_constraintTop_toBottomOf="@id/constraintBack"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="38dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutDiscount"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="18dp"
-        app:cardCornerRadius="12dp">
+        app:layout_constraintTop_toBottomOf="@+id/constraintBack"
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@color/card_background"
-        android:scaleType="centerCrop"
-        />
-    </androidx.cardview.widget.CardView>
+        >
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/card"
-        android:layout_marginTop="12dp"
-        android:layout_marginHorizontal="36dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="0dp"
+            android:layout_height="176dp"
+            android:layout_marginHorizontal="38dp"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@color/white" />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/progressBar"
+                />
+        </androidx.cardview.widget.CardView>
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@color/white"
-            android:text="@string/fragment_detail_discount_desc"
             android:id="@+id/desc"
-            />
-    </ScrollView>
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="18dp"
+            android:scrollbars="vertical"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="20dp"
+            tools:text="@string/fragment_detail_discount_desc" />
 
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/loading"
+        layout="@layout/handle_loading" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

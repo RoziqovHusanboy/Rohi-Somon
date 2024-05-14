@@ -1,12 +1,13 @@
 package tj.tajsoft.loyalrsn.data.remote.model.auth
 
+
 import com.google.gson.annotations.SerializedName
 
-data class ResponseFindUsername (
+data class ResponseFindUsername(
     @SerializedName("found")
-    val found:Boolean,
+    val found: Boolean,
     @SerializedName("id")
-    val id :Int,
+    val id: Int,
     @SerializedName("status")
-    val status:String
+    val status: String
 )

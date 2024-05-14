@@ -1,24 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_marginBottom="16dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card"
         android:layout_width="0dp"
         android:layout_height="176dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:cardCornerRadius="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-         app:cardCornerRadius="12dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <ImageView
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@color/card_background"
             android:scaleType="centerCrop"
-            />
+            android:src="@color/white" />
+
     </androidx.cardview.widget.CardView>
+
+    <ProgressBar
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/progressBar"
+        android:indeterminateTintMode="src_atop"
+        android:elevation="4dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/card_background"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

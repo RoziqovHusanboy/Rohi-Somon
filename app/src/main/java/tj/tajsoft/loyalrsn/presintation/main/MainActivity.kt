@@ -6,15 +6,17 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.core.view.forEachIndexed
 import androidx.core.view.isVisible
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import tajsoft.demoproject.myapplication.presintation.main.BottomNavigationVisibilityListener
 import tj.tajsoft.loyalrsn.R
+import tj.tajsoft.loyalrsn.data.local.TokenUserStore
 import tj.tajsoft.loyalrsn.databinding.ActivityMainBinding
-import tj.tajsoft.loyalrsn.domain.model.Destination
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), BottomNavigationVisibilityListener {
@@ -26,6 +28,14 @@ class MainActivity : AppCompatActivity(), BottomNavigationVisibilityListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            if (!it.isSuccessful){
+                return@addOnCompleteListener
+            }
+            val token = it.result
+           viewModel.saveTokenUser(token)
+
+        }
         binding.apply {
             navigation.setupWithNavController(navController)
             navigation.setOnItemSelectedListener {
@@ -46,7 +56,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationVisibilityListener {
                         R.id.otpFragment,
                         R.id.registerOneFragment,
                         R.id.registerTwoFragment,
-                        R.id.logInFragment
+                        R.id.logInFragment,
+                        R.id.QRCodeFragment
                     ).all {
                         it != destination.id
                     }

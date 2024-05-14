@@ -5,646 +5,590 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+
+    <ScrollView
+        android:id="@+id/ScrollView"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:src="@drawable/home_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        android:layout_height="match_parent">
 
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardConstraint"
-        android:layout_width="280dp"
-        android:layout_height="163dp"
-        android:layout_marginTop="47dp"
-         app:cardBackgroundColor="#23325C"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_width="0dp"
-            android:layout_height="6dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:dividerColor="#283E8D"
-            />
-        <TextView
-            android:id="@+id/countTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="26.10"
-            android:textColor="@color/white"
-            android:textSize="32dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tjsTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="TJS"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/bonusTv"
-            app:layout_constraintStart_toEndOf="@id/countTv"
-            app:layout_constraintTop_toTopOf="@id/countTv" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/home_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/bonusTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="Бонусов"
-            android:textColor="#8EA4F3"
-            android:textSize="10sp"
-            app:layout_constraintStart_toEndOf="@id/countTv"
-            app:layout_constraintTop_toBottomOf="@id/tjsTv" />
 
-        <ImageView
-            android:id="@+id/QRcode"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="25dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_qrcode"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardConstraint"
+                android:layout_width="280dp"
+                android:layout_height="163dp"
+                android:layout_marginTop="47dp"
+                app:cardBackgroundColor="#23325C"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/divider"
-            android:layout_width="232dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            app:dividerColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/countTv" />
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/swipe_refresh_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/montserrat_semibold"
-            android:maxLines="2"
-            android:text="Рустам Ходжибаев"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@id/divider"
-            app:layout_constraintTop_toBottomOf="@id/divider" />
 
-        <TextView
-            android:id="@+id/idName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="@string/home_fragment_id_name"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@id/name"
-            app:layout_constraintTop_toBottomOf="@id/name" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
 
-        <TextView
-            android:id="@+id/barakatTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="Баракат"
-            android:textColor="#F59D47"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@id/idName"
-            app:layout_constraintEnd_toEndOf="parent" />
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_width="0dp"
+                            android:layout_height="6dp"
+                            app:dividerColor="#283E8D"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/statusTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="Статус"
-            android:textColor="@color/white"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toTopOf="@id/barakatTV"
-            app:layout_constraintStart_toStartOf="@id/barakatTV" />
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone"
+                            android:id="@+id/layoutActiveCard">
+
+                        <TextView
+                            android:id="@+id/countTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/montserrat_semibold"
+                            tools:text="26.10"
+                            android:textColor="@color/white"
+                            android:textSize="32dp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tjsTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="TJS"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toTopOf="@id/bonusTv"
+                            app:layout_constraintStart_toEndOf="@id/countTv"
+                            app:layout_constraintTop_toTopOf="@id/countTv" />
+
+                        <TextView
+                            android:id="@+id/bonusTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="Бонусов"
+                            android:textColor="#8EA4F3"
+                            android:textSize="10sp"
+                            app:layout_constraintStart_toEndOf="@id/countTv"
+                            app:layout_constraintTop_toBottomOf="@id/tjsTv" />
+
+                        <ImageView
+                            android:id="@+id/QRcode"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginEnd="15dp"
+                            android:padding="10dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_qrcode"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:id="@+id/divider"
+                            android:layout_width="232dp"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="16dp"
+                            app:dividerColor="@color/white"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/countTv" />
+
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="113dp"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:maxLines="2"
+                            tools:text="Рустам Ходжибаев"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="@id/divider"
+                            app:layout_constraintTop_toBottomOf="@id/divider" />
+
+                        <TextView
+                            android:id="@+id/idName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:layout_marginTop="-3dp"
+                            app:layout_constraintStart_toStartOf="@id/name"
+                            app:layout_constraintTop_toBottomOf="@id/name" />
+
+                        <TextView
+                            android:id="@+id/barakatTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            tools:text="Баракат"
+                            android:textColor="#F59D47"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@id/idName"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_goneMarginBottom="10dp"
+                            app:layout_goneMarginEnd="24dp" />
+
+                        <TextView
+                            android:id="@+id/statusTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="40dp"
+                            android:layout_marginBottom="30dp"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="Статус"
+                            android:textColor="@color/white"
+                            android:textSize="10sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/layoutDismissCard"
+                            android:visibility="visible"
+
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                android:text="Рохи Сомон"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:layout_marginTop="24dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                android:layout_marginStart="-20dp"
+                                android:textSize="24sp"
+                                android:id="@+id/nameDissmis"
+                                />
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                app:layout_constraintStart_toEndOf="@id/nameDissmis"
+                                app:layout_constraintTop_toTopOf="@id/nameDissmis"
+                                app:layout_constraintBottom_toBottomOf="@id/nameDissmis"
+                                android:src="@drawable/ic_lock"
+                                android:layout_marginStart="10dp"
+                                />
+
+                            <com.google.android.material.divider.MaterialDivider
+                                android:id="@+id/dividerDismiss"
+                                android:layout_width="232dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="16dp"
+                                app:dividerColor="@color/white"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/nameDissmis" />
+
+                            <TextView
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toBottomOf="@id/dividerDismiss"
+                                app:layout_constraintStart_toStartOf="parent"
+                                android:text="@string/fragment_home_dissmis_text"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                android:textColor="#CDCACA"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:layout_marginTop="10dp"
+                                android:textAlignment="center"
+                                android:textSize="12sp"
+                                />
+
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/AIConstraint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toStartOf="@id/DTConstraint"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardConstraint">
+
+
+                <ProgressBar
+                    android:id="@+id/progress_AI"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="10dp"
+                    android:indeterminateOnly="false"
+                     android:progressDrawable="@drawable/progressbar_background"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardConstraint"
+                    tools:ignore="NotSibling"
+                    tools:progress="10"
+                     />
+
+                <TextView
+                    android:id="@+id/countLitr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    tools:text="@string/fragment_home_progress_ai_text"
+                    android:textColor="#23325C"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/AI"
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:layout_marginTop="-6dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="АИ"
+                    android:textColor="#4267EB"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/countLitr"
+                    app:layout_constraintStart_toStartOf="@id/countLitr"
+                    app:layout_constraintTop_toBottomOf="@id/countLitr" />
+
+                <TextView
+                    android:id="@+id/textAfzun"
+                    android:layout_width="46dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="0dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="до авзун 100л"
+                    android:textAlignment="center"
+                    android:textColor="#4267EB"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="@id/countLitr"
+                    app:layout_constraintStart_toStartOf="@id/countLitr"
+                    app:layout_constraintTop_toBottomOf="@id/AI" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/DTConstraint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toStartOf="@id/gazConstraint"
+                app:layout_constraintStart_toEndOf="@id/AIConstraint"
+                app:layout_constraintTop_toBottomOf="@id/cardConstraint">
+
+
+                <ProgressBar
+                    android:id="@+id/progress_DT"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="10dp"
+                    android:indeterminateOnly="false"
+                     android:progressDrawable="@drawable/progressbar_background"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardConstraint"
+                    tools:ignore="NotSibling"
+                    tools:progress="0" />
+
+                <TextView
+                    android:id="@+id/countLitrDT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    tools:text="12 л"
+                    android:textColor="#23325C"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/DT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:layout_marginTop="-6dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="ДТ"
+                    android:textColor="#4267EB"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+
+                    app:layout_constraintEnd_toEndOf="@id/countLitrDT"
+                    app:layout_constraintStart_toStartOf="@id/countLitrDT"
+                    app:layout_constraintTop_toBottomOf="@id/countLitrDT" />
+
+                <TextView
+                    android:id="@+id/textAfzunDT"
+                    android:layout_width="46dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="0dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="до авзун 50л"
+                    android:textAlignment="center"
+                    android:textColor="#4267EB"
+                    android:textSize="10sp"
+
+                    app:layout_constraintEnd_toEndOf="@id/countLitrDT"
+                    app:layout_constraintStart_toStartOf="@id/countLitrDT"
+                    app:layout_constraintTop_toBottomOf="@id/DT" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/gazConstraint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/DTConstraint"
+                app:layout_constraintTop_toBottomOf="@id/cardConstraint">
+
+
+                <ProgressBar
+                    android:id="@+id/progress_GAZ"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="10dp"
+                    android:indeterminateOnly="false"
+                     android:progressDrawable="@drawable/progressbar_background"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardConstraint"
+                    tools:ignore="NotSibling"
+                    tools:progress="10" />
+
+                <TextView
+                    android:id="@+id/countLitrGaz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    tools:text="55 л"
+                    android:textColor="#23325C"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/Gaz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:layout_marginTop="-6dp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="ГАЗ"
+                    android:textColor="#4267EB"
+                    android:textSize="18sp"
+
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@id/countLitrGaz"
+                    app:layout_constraintStart_toStartOf="@id/countLitrGaz"
+                    app:layout_constraintTop_toBottomOf="@id/countLitrGaz" />
+
+                <TextView
+                    android:id="@+id/textAfzunGaz"
+                    android:layout_width="46dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="0dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:text="до авзун 100л"
+                    android:textAlignment="center"
+                    android:textColor="#4267EB"
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toEndOf="@id/countLitrGaz"
+                    app:layout_constraintStart_toStartOf="@id/countLitrGaz"
+                    app:layout_constraintTop_toBottomOf="@id/Gaz" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerFuel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/gazConstraint"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_fuel_recycler_view" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerviewDiscount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recyclerFuel"
+                tools:listitem="@layout/item_aksiya_rv" />
+
+            <TextView
+                android:id="@+id/id_transaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="История транзакции"
+                app:layout_constraintStart_toStartOf="@id/recyclerviewDiscount"
+                app:layout_constraintTop_toBottomOf="@id/recyclerviewDiscount" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/show_all"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:fontFamily="@font/montserrat_regular"
+                android:paddingEnd="15dp"
+                android:text="Ещё"
+                android:textAllCaps="false"
+                android:textColor="#23325C"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/id_transaction"
+                app:layout_constraintBottom_toBottomOf="@id/id_transaction"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/id_transaction" />
+
+            <TextView
+                android:id="@+id/dataTransaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:maxLength="11"
+                android:textColor="#262A2E"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/id_transaction" />
+
+            <TextView
+                android:id="@+id/cityTransaction"
+                android:layout_width="156dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:maxLines="1"
+                android:textColor="#7B849D"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dataTransaction" />
+
+            <TextView
+                android:id="@+id/count_litr_Transaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/montserrat_black"
+                android:textColor="#262A2E"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/dataTransaction"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/dataTransaction" />
+
+            <TextView
+                android:id="@+id/vidToplivoTransaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="#262A2E"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/count_litr_Transaction"
+                app:layout_constraintTop_toTopOf="@id/count_litr_Transaction" />
+
+            <TextView
+                android:id="@+id/keshbek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="#457D73"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vidToplivoTransaction" />
+
+            <TextView
+                android:id="@+id/summaTransaction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="#23325C"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/keshbek"
+                app:layout_constraintEnd_toStartOf="@id/keshbek"
+                app:layout_constraintTop_toTopOf="@id/keshbek" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+    </ScrollView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/AIConstraint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toStartOf="@id/DTConstraint"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardConstraint">
 
+    <include
+        android:id="@+id/error"
+        layout="@layout/handle_error" />
 
-        <ImageView
-            android:id="@+id/AI_circle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/circle_shape"
-            app:layout_constraintStart_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/countLitr"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="75 л"
-            android:textColor="#23325C"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/AI"
-            android:layout_width="wrap_content"
-            android:layout_height="22dp"
-            android:layout_marginTop="-6dp"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="АИ"
-            android:textColor="#4267EB"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/countLitr"
-            app:layout_constraintStart_toStartOf="@id/countLitr"
-            app:layout_constraintTop_toBottomOf="@id/countLitr" />
-
-        <TextView
-            android:id="@+id/textAfzun"
-            android:layout_width="46dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="0dp"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="до авзун 100л"
-            android:textAlignment="center"
-            android:textColor="#4267EB"
-            android:textSize="10sp"
-            app:layout_constraintEnd_toEndOf="@id/countLitr"
-            app:layout_constraintStart_toStartOf="@id/countLitr"
-            app:layout_constraintTop_toBottomOf="@id/AI" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/DTConstraint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toStartOf="@id/gazConstraint"
-        app:layout_constraintStart_toEndOf="@id/AIConstraint"
-        app:layout_constraintTop_toBottomOf="@id/cardConstraint">
-
-
-        <ImageView
-            android:id="@+id/DT_circle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/circle_shape"
-            app:layout_constraintStart_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/countLitrDT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="15 л"
-            android:textColor="#23325C"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/DT"
-            android:layout_width="wrap_content"
-            android:layout_height="22dp"
-            android:layout_marginTop="-6dp"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="ДТ"
-            android:textColor="#4267EB"
-            android:textSize="18sp"
-            android:textStyle="bold"
-
-            app:layout_constraintEnd_toEndOf="@id/countLitrDT"
-            app:layout_constraintStart_toStartOf="@id/countLitrDT"
-            app:layout_constraintTop_toBottomOf="@id/countLitrDT" />
-
-        <TextView
-            android:id="@+id/textAfzunDT"
-            android:layout_width="46dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="0dp"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="до авзун 50л"
-            android:textAlignment="center"
-            android:textColor="#4267EB"
-            android:textSize="10sp"
-
-            app:layout_constraintEnd_toEndOf="@id/countLitrDT"
-            app:layout_constraintStart_toStartOf="@id/countLitrDT"
-            app:layout_constraintTop_toBottomOf="@id/DT" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/gazConstraint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/DTConstraint"
-        app:layout_constraintTop_toBottomOf="@id/cardConstraint">
-
-
-        <ImageView
-            android:id="@+id/gaz_circle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/circle_shape"
-            app:layout_constraintStart_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/countLitrGaz"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="55 л"
-            android:textColor="#23325C"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/Gaz"
-            android:layout_width="wrap_content"
-            android:layout_height="22dp"
-            android:layout_marginTop="-6dp"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="ГАЗ"
-            android:textColor="#4267EB"
-            android:textSize="18sp"
-
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@id/countLitrGaz"
-            app:layout_constraintStart_toStartOf="@id/countLitrGaz"
-            app:layout_constraintTop_toBottomOf="@id/countLitrGaz" />
-
-        <TextView
-            android:id="@+id/textAfzunGaz"
-            android:layout_width="46dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="0dp"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="до авзун 100л"
-            android:textAlignment="center"
-            android:textColor="#4267EB"
-            android:textSize="10sp"
-            app:layout_constraintEnd_toEndOf="@id/countLitrGaz"
-            app:layout_constraintStart_toStartOf="@id/countLitrGaz"
-            app:layout_constraintTop_toBottomOf="@id/Gaz" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/back_95"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/circle_shape_95"
-        app:layout_constraintEnd_toStartOf="@id/back_92"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/AIConstraint" />
-
-    <ImageView
-        android:id="@+id/ic_95"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_semibold"
-        android:src="@drawable/home_ic_95"
-        app:layout_constraintEnd_toEndOf="@id/back_95"
-        app:layout_constraintStart_toStartOf="@id/back_95"
-        app:layout_constraintTop_toTopOf="@id/back_95" />
-
-    <TextView
-        android:id="@+id/text_95"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="10.00 TJS"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/ic_95"
-        app:layout_constraintStart_toStartOf="@id/ic_95"
-        app:layout_constraintTop_toBottomOf="@id/ic_95" />
-
-    <ImageView
-        android:id="@+id/back_92"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/circle_shape_92"
-        app:layout_constraintEnd_toStartOf="@id/back_sug"
-        app:layout_constraintStart_toEndOf="@id/back_95"
-        app:layout_constraintTop_toBottomOf="@id/AIConstraint" />
-
-    <ImageView
-        android:id="@+id/ic_92"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_semibold"
-        android:src="@drawable/home_ic_92"
-
-        app:layout_constraintEnd_toEndOf="@id/back_92"
-        app:layout_constraintStart_toStartOf="@id/back_92"
-        app:layout_constraintTop_toTopOf="@id/back_92" />
-
-    <TextView
-        android:id="@+id/text_92"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="9.35 TJS"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/ic_92"
-        app:layout_constraintStart_toStartOf="@id/ic_92"
-        app:layout_constraintTop_toBottomOf="@id/ic_92" />
-
-    <ImageView
-        android:id="@+id/back_sug"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/circle_shape_sug"
-        app:layout_constraintEnd_toStartOf="@id/back_dt"
-        app:layout_constraintStart_toEndOf="@id/back_92"
-        app:layout_constraintTop_toBottomOf="@id/AIConstraint" />
-
-    <ImageView
-        android:id="@+id/ic_sug"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_semibold"
-
-        android:src="@drawable/home_ic_sug"
-        app:layout_constraintEnd_toEndOf="@id/back_sug"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/back_sug"
-        app:layout_constraintTop_toTopOf="@id/back_sug" />
-
-    <TextView
-        android:id="@+id/text_sugd"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="10.00 TJS"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/ic_sug"
-        app:layout_constraintStart_toStartOf="@id/ic_sug"
-        app:layout_constraintTop_toBottomOf="@id/ic_sug" />
-
-    <ImageView
-        android:id="@+id/back_dt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/circle_shape_dt"
-        app:layout_constraintEnd_toStartOf="@id/back_dt_ekto"
-        app:layout_constraintStart_toEndOf="@id/ic_sug"
-        app:layout_constraintTop_toBottomOf="@id/AIConstraint" />
-
-
-    <ImageView
-        android:id="@+id/ic_dt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_semibold"
-        android:src="@drawable/home_ic_dt"
-
-        app:layout_constraintEnd_toEndOf="@id/back_dt"
-        app:layout_constraintStart_toStartOf="@id/back_dt"
-        app:layout_constraintTop_toTopOf="@id/back_dt" />
-
-    <TextView
-        android:id="@+id/text_dt"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="10.00 TJS"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-
-        app:layout_constraintEnd_toEndOf="@id/ic_dt"
-        app:layout_constraintStart_toStartOf="@id/ic_dt"
-        app:layout_constraintTop_toBottomOf="@id/ic_dt" />
-
-    <ImageView
-        android:id="@+id/back_dt_ekto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/circle_shape_dt_ekto"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ic_dt"
-        app:layout_constraintTop_toBottomOf="@id/AIConstraint" />
-
-
-    <ImageView
-        android:id="@+id/ic_dt_ekto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_semibold"
-        android:src="@drawable/home_ic_dt_ekto"
-        app:layout_constraintEnd_toEndOf="@id/back_dt_ekto"
-        app:layout_constraintStart_toStartOf="@id/back_dt_ekto"
-        app:layout_constraintTop_toTopOf="@id/back_dt_ekto" />
-
-    <TextView
-        android:id="@+id/text_dt_ekto"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="10.00 TJS"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/ic_dt_ekto"
-        app:layout_constraintStart_toStartOf="@id/ic_dt_ekto"
-        app:layout_constraintTop_toBottomOf="@id/ic_dt_ekto" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/back_95"
-        tools:listitem="@layout/item_aksiya_rv" />
-
-    <TextView
-        android:id="@+id/id_transaction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="История транзакции"
-        app:layout_constraintStart_toStartOf="@id/recyclerview"
-        app:layout_constraintTop_toBottomOf="@id/recyclerview" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/show_all"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:drawableEnd="@drawable/ic_right"
-        android:fontFamily="@font/montserrat_regular"
-        android:paddingEnd="15dp"
-        android:text="Ещё"
-        android:textColor="#23325C"
-        android:textSize="12sp"
-        app:layout_constraintBaseline_toBaselineOf="@id/id_transaction"
-        app:layout_constraintBottom_toBottomOf="@id/id_transaction"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/id_transaction" />
-
-    <TextView
-        android:id="@+id/dataTransaction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="06.11.2022"
-
-        android:textColor="#262A2E"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/id_transaction" />
-
-    <TextView
-        android:id="@+id/cityTransaction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="г. Худжанд, 12 мкр.,"
-
-        android:textColor="#7B849D"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dataTransaction" />
-
-    <TextView
-        android:id="@+id/count_litr_Transaction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="10л"
-        android:textColor="#262A2E"
-        android:textSize="14sp"
-        android:fontFamily="@font/montserrat_black"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/dataTransaction"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/dataTransaction" />
-
-    <TextView
-        android:id="@+id/vidToplivoTransaction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="3dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="АИ-92 /"
-        android:textColor="#262A2E"
-
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@id/count_litr_Transaction"
-        app:layout_constraintTop_toTopOf="@id/count_litr_Transaction" />
-
-    <TextView
-        android:id="@+id/keshbek"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="+1.2 TJS"
-        android:textColor="#457D73"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/vidToplivoTransaction" />
-
-    <TextView
-        android:id="@+id/summaTransaction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="100 TJS / "
-        android:textColor="#23325C"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/keshbek"
-        app:layout_constraintEnd_toStartOf="@id/keshbek"
-        app:layout_constraintTop_toTopOf="@id/keshbek" />
+    <include
+        android:id="@+id/loading"
+        layout="@layout/handle_loading" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

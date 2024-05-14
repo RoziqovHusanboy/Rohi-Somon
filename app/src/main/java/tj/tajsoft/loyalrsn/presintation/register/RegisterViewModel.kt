@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import tj.tajsoft.loyalrsn.data.local.BeforeNumberStore
 import tj.tajsoft.loyalrsn.data.local.NumberStore
 import tj.tajsoft.loyalrsn.data.remote.model.auth.RegisterResponse
 import tj.tajsoft.loyalrsn.domain.repo.RegisterRepo
@@ -14,7 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     private val registerRepo: RegisterRepo,
-    private val numberStore: NumberStore
+    private val numberStore: NumberStore,
+    private val beforeNumberStore: BeforeNumberStore
 ) :ViewModel() {
       val loading = MutableLiveData(false)
       val error = MutableLiveData<Exception>()
@@ -22,14 +24,14 @@ class RegisterViewModel @Inject constructor(
 
 
     fun register(name: String, car_number: String, email: String,
-                 birthday: String, gender: String, password: String,city: String, push_token: String) =
+                 birthday: String, gender: String, password: String,city: String) =
         viewModelScope.launch {
             loading.postValue(true)
             try {
-                val phone_number = numberStore.get()
+                val phone_number = beforeNumberStore.get()
+                Log.d("TAG", "register:$phone_number")
                 registerRepo.savePassword(password)
-                Log.d("phone_number", "register:${numberStore.get()} ")
-               val _response =  registerRepo.register(name, phone_number.toString(), phone_number.toString(), car_number, email, birthday, gender,password,city, push_token)
+               val _response =  registerRepo.register(name, phone_number.toString(), phone_number.toString(), car_number, email, birthday, gender,password,city)
                 response.postValue(_response)
              }catch (e:Exception){
                  error.postValue(e)
@@ -38,5 +40,15 @@ class RegisterViewModel @Inject constructor(
             }
     }
 
+    fun saveNumber() = viewModelScope.launch {
+        try {
+            beforeNumberStore.get()?.let {
+                registerRepo.saveNumber(it)
+            }
+            Log.d("saveNumber", "saveNumberRegister : saved")
 
+        }catch (e:Exception){
+            Log.d("saveNumber", "saveNumber: $e")
+        }
+    }
 }

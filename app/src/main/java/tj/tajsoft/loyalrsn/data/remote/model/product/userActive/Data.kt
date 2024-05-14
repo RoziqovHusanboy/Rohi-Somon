@@ -1,4 +1,4 @@
-package tj.tajsoft.loyalrsn.data.remote.model.product
+package tj.tajsoft.loyalrsn.data.remote.model.product.userActive
 
 
 import com.google.gson.annotations.SerializedName
@@ -17,7 +17,7 @@ data class Data(
     @SerializedName("email")
     val email: String,
     @SerializedName("fond")
-    val fond: Int,
+    val fond: String,
     @SerializedName("gender")
     val gender: Int,
     @SerializedName("id")
@@ -33,7 +33,7 @@ data class Data(
     @SerializedName("r_id")
     val rId: Int,
     @SerializedName("saldo")
-    val saldo: Int,
+    val saldo: String,
     @SerializedName("status")
     val status: String,
     @SerializedName("username")

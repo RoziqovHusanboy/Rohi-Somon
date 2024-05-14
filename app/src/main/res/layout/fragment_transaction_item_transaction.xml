@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+     >
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -12,6 +13,7 @@
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,6 +33,7 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="06.11.2022"
+                android:maxLength="11"
                 android:textColor="#262A2E"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -38,13 +41,13 @@
 
             <TextView
                 android:id="@+id/cityTransaction"
-                android:layout_width="wrap_content"
+                android:layout_width="156dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="г. Худжанд, 12 мкр.,"
-
+                android:maxLines="1"
                 android:textColor="#7B849D"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:text="10л"
+                android:text="@string/fragment_transaction_item_count_litr"
                 android:textColor="#262A2E"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -70,9 +73,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="3dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="АИ-92 /"
+                android:text="@string/fragment_transaction_item_vid_toplivo_text"
                 android:textColor="#262A2E"
-
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/count_litr_Transaction"
                 app:layout_constraintTop_toTopOf="@id/count_litr_Transaction" />
@@ -82,11 +84,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="8dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="+1.2 TJS"
+                android:text="@string/fragment_transaction_item_keshbek_text"
                 android:textColor="#457D73"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/vidToplivoTransaction" />
@@ -95,10 +97,10 @@
                 android:id="@+id/summaTransaction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="100 TJS / "
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/fragment_transaction_item_summa_count"
                 android:textColor="#23325C"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/keshbek"
                 app:layout_constraintEnd_toStartOf="@id/keshbek"

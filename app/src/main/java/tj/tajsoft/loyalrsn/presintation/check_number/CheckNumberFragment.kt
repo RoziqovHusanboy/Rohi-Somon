@@ -49,11 +49,13 @@ class CheckNumberFragment : Fragment() {
                         Toast.makeText(requireContext(), "Number should be digit", Toast.LENGTH_SHORT).show()
                     }
                 } else {
+
                      binding.imageViewIconNextVisible.isVisible = true
                     binding.imageViewIconNextUnVisible.isVisible = false
-                    viewModel.checkPhoneNumber(s.toString())
                      binding.imageViewIconNextVisible.setOnClickListener {
-                        findNavController().navigate(CheckNumberFragmentDirections.toOtpFragment(s.toString()))
+                         Log.d("TAG", "afterTextChanged:$s ")
+                         viewModel.checkPhoneNumber(s.toString())
+                         findNavController().navigate(CheckNumberFragmentDirections.toOtpFragment(s.toString()))
                     }
                 }
             }

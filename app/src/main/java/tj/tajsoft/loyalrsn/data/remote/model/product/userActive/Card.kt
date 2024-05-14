@@ -1,11 +1,11 @@
-package tj.tajsoft.loyalrsn.data.remote.model.product
+package tj.tajsoft.loyalrsn.data.remote.model.product.userActive
 
 
 import com.google.gson.annotations.SerializedName
 
 data class Card(
     @SerializedName("balans")
-    val balans: Int,
+    val balans: Double,
     @SerializedName("barcode")
     val barcode: String,
     @SerializedName("card_type")

@@ -1,8 +1,21 @@
 <resources>
     <string name="app_name">RohiSomon</string>
-    <string name="fragment_detail_discount_desc">Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt ut voluptate aute id deserunt nisi. Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint</string>
+    <string name="fragment_detail_discount_desc">Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint deserunt utAliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat is deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat iis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat is deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat ncididunt sint deserunt ut voluptate a voluptate aut voluptate aute id deserunt nisi. Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et. Sunt qui esse pariatur duis deserunt mollit dolore cillum minim tempor enim. Elit aute irure tempor cupidatat incididunt sint</string>
     <string name="item_bottom_sheet_desc">нохияи Б.Гафуров, чамоти Гозиён, дехаи Котма, рохи мошингарди Конибодом-Ч.Расулов.</string>
     <string name="fragment_register_two_agree_text_one">с Условиями использования и</string>
     <string name="fragment_register_two_agree_text_two">Политикой конфиденциальности</string>
     <string name="home_fragment_id_name">N %s</string>
+    <string name="fragment_transaction_item_summa_count">%s TJS /</string>
+    <string name="fragment_transaction_item_vid_toplivo_text">%s /</string>
+    <string name="fragment_transaction_item_keshbek_text">+%s TJS</string>
+    <string name="fragment_transaction_item_count_litr">%s л</string>
+    <string name="fragment_home_vid_toplivo">%s /</string>
+    <string name="fragment_home_count_litr">%sл</string>
+    <string name="fragment_home_summa_transaction">%s TJS /</string>
+    <string name="fragment_home_keshbek">+%s TJS</string>
+    <string name="item_bottom_sheet_text_distance">%s км</string>
+    <string name="fragment_gasstation_detail_textview_distance">%s km</string>
+    <string name="fragment_home_progress_ai_text">%s л</string>
+    <string name="fragment_home_dissmis_text">Мы приняли вашу заявку и в настоящее время она находится на рассмотрении.</string>
+    <string name="item_bottom_sheet_title_desc_password_update">На номер %s был отправлен код-подтвержедния</string>
 </resources>

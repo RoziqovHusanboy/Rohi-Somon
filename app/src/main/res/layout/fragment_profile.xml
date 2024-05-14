@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:ignore="MissingDefaultResource">
 
     <LinearLayout
         android:id="@+id/toolBar"
@@ -125,8 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/montserrat_regular"
-
-                android:text="+992 92811-00-33"
+                tools:text="+992 92811-00-33"
                 android:textColor="#7B849D"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -164,7 +164,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/montserrat_regular"
-
                 android:text="ФИО"
                 android:textColor="#7B849D"
                 android:textSize="12sp" />
@@ -175,8 +174,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/montserrat_regular"
-
-                android:text="Сухроб Ходжаев"
+                tools:text="Сухроб Ходжаев"
                 android:textColor="#7B849D"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -213,7 +211,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/montserrat_regular"
-
                 android:text="Местоположение"
                 android:textColor="#7B849D"
                 android:textSize="12sp" />
@@ -224,15 +221,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/montserrat_regular"
-                android:text="Худжанд"
-
+                tools:text="Худжанд"
                 android:textColor="#7B849D"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/gmailLayout"
+        android:id="@+id/carLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -242,11 +238,11 @@
 
         <ImageView
             android:id="@+id/imageGmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:layout_marginStart="74dp"
             android:layout_marginTop="6dp"
-            android:src="@drawable/fragment_profile_ic_gmail"
+            android:src="@drawable/icon_car"
 
             />
 
@@ -257,24 +253,22 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textGmail"
+                android:id="@+id/textCar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/montserrat_regular"
-
-                android:text="Электронная почта"
+                android:text="Номер машины"
                 android:textColor="#7B849D"
                 android:textSize="12sp" />
 
             <TextView
-                android:id="@+id/nameGmail"
+                android:id="@+id/nameCar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/montserrat_regular"
-                android:text="suhrobkh0033@gmail.com"
-
+                tools:text="0202AA02"
                 android:textColor="#7B849D"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -287,7 +281,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gmailLayout">
+        app:layout_constraintTop_toBottomOf="@id/carLayout">
 
         <ImageView
             android:id="@+id/imageBirth"
@@ -322,8 +316,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:fontFamily="@font/montserrat_regular"
-
-                android:text="21.07.1988"
+                tools:text="21.07.1988"
                 android:textColor="#7B849D"
                 android:textSize="12sp" />
         </LinearLayout>

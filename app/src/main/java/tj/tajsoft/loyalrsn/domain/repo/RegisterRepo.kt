@@ -1,13 +1,8 @@
 package tj.tajsoft.loyalrsn.domain.repo
 
-import kotlinx.coroutines.flow.Flow
-import retrofit2.Call
-import tj.tajsoft.loyalrsn.data.remote.model.auth.LogInModel
 import tj.tajsoft.loyalrsn.data.remote.model.auth.LogInResponse
 import tj.tajsoft.loyalrsn.data.remote.model.auth.RegisterResponse
 import tj.tajsoft.loyalrsn.data.remote.model.auth.ResponseFindUsername
-import tj.tajsoft.loyalrsn.data.remote.model.product.ResponseUser
-import tj.tajsoft.loyalrsn.domain.model.Destination
 
 interface RegisterRepo {
     suspend fun register(
@@ -19,11 +14,11 @@ interface RegisterRepo {
         birthday: String,
         gender: String,
         password: String,
-        city: String,
-        push_token: String
-    ): RegisterResponse
+        city: String
+     ): RegisterResponse
 
-    suspend fun saveNumber(number:Int)
+    suspend fun saveNumber(number:String)
+    suspend fun saveNumberFromOtpFragment(number: String)
     suspend fun checkPhoneNumber(recipients:String,message:String)
     suspend fun saveOtpNumber(message: String)
     suspend fun savePassword(password: String)
@@ -33,8 +28,8 @@ interface RegisterRepo {
     suspend fun clearNumber()
     suspend fun findUserByUsername(username: String):ResponseFindUsername
     suspend fun logInCheck(password: String):LogInResponse
-
-    suspend fun getUser(): Call<ResponseUser>
+    suspend fun saveTokenUser(tokenUser:String)
+    suspend fun getPhoneNumber():String
 
 
 
