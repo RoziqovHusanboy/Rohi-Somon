@@ -36,7 +36,7 @@ class MoreViewModel @Inject constructor(
 
     private fun getUser() = viewModelScope.launch {
         try {
-            val response = repoProductRepository.getUser()
+            val response = repoProductRepository.getUserFromLocal()
             user.postValue(response)
         } catch (e: Exception) {
             Log.d("TAG", "getUserError: $e")

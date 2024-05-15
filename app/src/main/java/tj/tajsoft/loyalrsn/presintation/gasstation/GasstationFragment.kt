@@ -12,6 +12,7 @@ import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -54,6 +58,7 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
     private var currentLocation: Location? = null
     private var locationLongitute: Double? = null
     private var locationLattitute: Double? = null
+    private var mLocationPermissionGranted:Boolean = false
 
 
     override fun onCreateView(
@@ -117,18 +122,9 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
             )
             == PackageManager.PERMISSION_GRANTED
         ) {
-            myMap.isMyLocationEnabled = true
-            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-                // Move camera to current location
-                if (location != null) {
-                    locationLongitute = location.longitude
-                    locationLattitute = location.latitude
-                    currentLocation = location
-//                    val latLng = LatLng(location.latitude, location.longitude)
-                    myMap.isMyLocationEnabled = true
-//                    myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10f))
-                }
-            }
+            mLocationPermissionGranted = true
+            setupMapWithLocation()
+
         } else {
             // Request location permission
             ActivityCompat.requestPermissions(
@@ -169,7 +165,13 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
                 myMap.animateCamera(moveCamera)
                 marker.tag = data
             }
+
+            if (mLocationPermissionGranted ==true){
+                setupMapWithLocation()
+            }
+
             myMap.setOnMarkerClickListener { clickedMarker ->
+                setupMapWithLocation()
                 val clickedBranch = clickedMarker.tag as ResponseBranches
                 clickedBranch.data.forEach {
                     if (clickedMarker.title == it.title) {
@@ -181,6 +183,18 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+    @SuppressLint("MissingPermission")
+    private fun setupMapWithLocation() {
+        myMap.isMyLocationEnabled = true
+        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+             if (location != null) {
+                locationLongitute = location.longitude
+                locationLattitute = location.latitude
+                currentLocation = location
+                 myMap.isMyLocationEnabled = true
+             }
+        }
+    }
     private fun openDialog(newTitle: String, newDesc: String, marker: Marker) {
         val dialog = BottomSheetDialog(requireContext())
         dialog.setContentView(R.layout.item_bottom_sheet)
@@ -236,15 +250,10 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, enable My Location layer and move camera
-                myMap.isMyLocationEnabled = true
-                fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-                    if (location != null) {
-                        val latLng = LatLng(location.latitude, location.longitude)
-                        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-                    }
-                }
+                setupMapWithLocation()
+                mLocationPermissionGranted = true
             } else {
+                mLocationPermissionGranted = false
                 // Permission denied
                 Toast.makeText(requireContext(), "Location permission denied", Toast.LENGTH_SHORT)
                     .show()
@@ -252,15 +261,7 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun createBitmapFromView(view: View): Bitmap? {
-        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
-        val bitmap =
-            Bitmap.createBitmap(view.measuredWidth, view.measuredHeight, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        view.layout(0, 0, view.measuredWidth, view.measuredHeight)
-        view.draw(canvas)
-        return bitmap
-    }
+
 
     companion object {
         private const val REQUEST_LOCATION_PERMISSION = 1

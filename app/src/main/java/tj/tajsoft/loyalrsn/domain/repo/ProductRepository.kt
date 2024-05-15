@@ -11,6 +11,7 @@ import tj.tajsoft.loyalrsn.data.remote.model.updateCarNumber.ResponseCarNumber
 
 interface ProductRepository {
     suspend fun getUser(): ResponseUser
+    suspend fun getUserFromLocal():ResponseUser
     suspend fun getUserWithCard(): ResponseUserActive
     suspend fun getUserId():Int?
     suspend fun getTransaction(): ArrayList<ResponseTransaction>

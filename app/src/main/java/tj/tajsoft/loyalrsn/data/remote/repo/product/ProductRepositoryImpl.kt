@@ -1,6 +1,7 @@
 package tj.tajsoft.loyalrsn.data.remote.repo.product
 
 import android.util.Log
+import tj.tajsoft.loyalrsn.data.local.ResponseUserStore
 import tj.tajsoft.loyalrsn.data.local.TokenStore
 import tj.tajsoft.loyalrsn.data.local.UserIdStore
 import tj.tajsoft.loyalrsn.data.remote.api.product.ProductApi
@@ -20,17 +21,22 @@ import javax.inject.Inject
 class ProductRepositoryImpl @Inject constructor(
     private val productApi: ProductApi,
     private val userIdStore: UserIdStore,
-    private val tokenStore: TokenStore
+    private val tokenStore: TokenStore,
+    private val responseUserStore: ResponseUserStore
 ) : ProductRepository {
     override suspend fun getUser(): ResponseUser {
         val userId = userIdStore.get().toString().toInt()
         val token = tokenStore.get()!!
         val response = productApi.getUser("Bearer $token", userId)
-        response.data.status
-        Log.d("TAG", "getUser:$userId ")
-        Log.d("TAG", "getUserToken and userid:token $token :userid = $userId")
-//        Log.d("TAG", "getUserRespnonse:${response.data.card} ")
+       val responseLocal =  responseUserStore.set(response)
+        Log.d("TAG", "getUser: responseLocal saved")
         return response
+    }
+
+    override suspend fun getUserFromLocal(): ResponseUser {
+        val response = responseUserStore.get()
+        return response!!
+
     }
 
     override suspend fun getUserWithCard(): ResponseUserActive {
@@ -43,35 +49,35 @@ class ProductRepositoryImpl @Inject constructor(
 
     override suspend fun getUserId(): Int? {
         val user = userIdStore.get().toString().toInt()
-         return user
+        return user
     }
 
     override suspend fun getTransaction(): ArrayList<ResponseTransaction> {
-         val token = tokenStore.get()!!
+        val token = tokenStore.get()!!
         val userId = userIdStore.get()!!.toString().toInt()
         val response = productApi.getTransaction("Bearer $token", userId)
-         return response
+        return response
     }
 
     override suspend fun getFuel(): ResponseFuel {
         val token = tokenStore.get()!!
         val response = productApi.getFuel("Bearer $token")
-         return response
+        return response
     }
 
     override suspend fun getSale(): ResponseSale {
         val token = tokenStore.get()!!
         val response = productApi.getSale("Bearer $token")
-         return response
+        return response
     }
 
     override suspend fun getBranches(): ResponseBranches {
         val token = tokenStore.get()!!
         val response = productApi.getBranches("Bearer $token")
-         return response
+        return response
     }
 
-    override suspend fun updateCarNumber(carNumber: String):ResponseCarNumber {
+    override suspend fun updateCarNumber(carNumber: String): ResponseCarNumber {
         val token = tokenStore.get()!!
         val userId = userIdStore.get()!!.toString().toInt()
         val response = productApi.updateCarNumber(
@@ -94,8 +100,6 @@ class ProductRepositoryImpl @Inject constructor(
         Log.d("TAG", "updateCarNumber: $response")
         return response
     }
-
-
 
 
 }
