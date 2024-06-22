@@ -30,16 +30,20 @@ class MoreFragment:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.user.observe(viewLifecycleOwner){
-            if (it.data.status == "disable"){
-                binding.statusConstraint.isVisible = false
-            }else{
-                binding.statusConstraint.isVisible = true
-                viewModel.getUserWithCard()
-            }
-        }
+            if (it.isNullOrEmpty().not()){
+                if (it.first().status == "disable"){
+                    binding.statusConstraint.isVisible = false
+                }else{
+                    binding.statusConstraint.isVisible = true
+                    binding.vidStatus.text = it.firstOrNull()?.cardType
+                }
+                for (userEntity in it) {
+                    binding.myCards.isVisible =  userEntity.classX=="org"
 
-        viewModel.userActive.observe(viewLifecycleOwner){
-            binding.vidStatus.text = it.data.card.cardType
+                }
+            }
+
+
         }
         UI()
     }
@@ -48,11 +52,16 @@ class MoreFragment:Fragment() {
 
         binding.apply {
 
+                binding.myCards.setOnClickListener {
+                     findNavController().navigate(MoreFragmentDirections.toMultiCardFragment())
+            }
+
             profile.setOnClickListener {
                 findNavController().navigate(MoreFragmentDirections.actionMoreFragmentToProfileFragment())
             }
             logout.setOnClickListener {
                 viewModel.clearNumber()
+                viewModel.clearDataBase()
                 requireActivity().finish()
              }
             question.setOnClickListener {

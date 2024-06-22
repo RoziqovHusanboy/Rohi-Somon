@@ -22,7 +22,7 @@ interface RegisterRepo {
     suspend fun checkPhoneNumber(recipients:String,message:String)
     suspend fun saveOtpNumber(message: String)
     suspend fun savePassword(password: String)
-    suspend fun hasPhoneNumber():Boolean
+    suspend fun hasPhoneNumber():String?
     suspend fun hasUserID():Boolean
     suspend fun getPassword(): String?
     suspend fun clearNumber()

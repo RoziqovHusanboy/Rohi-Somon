@@ -8,10 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import tj.tajsoft.loyalrsn.data.local.OtpNumber
+import tj.tajsoft.loyalrsn.data.local.shared_preferance.OtpNumber
 import tj.tajsoft.loyalrsn.data.remote.model.auth.ResponseFindUsername
 import tj.tajsoft.loyalrsn.domain.repo.RegisterRepo
 import javax.inject.Inject

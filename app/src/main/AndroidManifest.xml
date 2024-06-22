@@ -33,7 +33,7 @@
         tools:targetApi="31">
 
         <receiver
-            android:name=".presintation.otp.OtpReceiver"
+            android:name=".presintation.otp.OtpReceiver.broadCastReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVER" />

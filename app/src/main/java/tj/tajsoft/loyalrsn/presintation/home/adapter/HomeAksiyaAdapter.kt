@@ -14,17 +14,18 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.squareup.picasso.Picasso
 import tj.tajsoft.loyalrsn.common.Constant
+import tj.tajsoft.loyalrsn.data.local.room.entity.sale.SaleEntity
 import tj.tajsoft.loyalrsn.data.remote.model.sale.Data
 import tj.tajsoft.loyalrsn.data.remote.model.sale.ResponseSale
 import tj.tajsoft.loyalrsn.databinding.ItemAksiyaRvBinding
 
-class HomeAksiyaAdapter(val list:ResponseSale, val loading: Boolean,val onClick:(id:Int)->Unit  ) :
+class HomeAksiyaAdapter(val list:List<SaleEntity>,val onClick:(id:Int)->Unit  ) :
 
     RecyclerView.Adapter<HomeAksiyaAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemAksiyaRvBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data:Data) {
+        fun bind(data:SaleEntity) {
             val constImage = Constant.IMAGE_URL
             val image = "$constImage${data.img}"
 
@@ -62,10 +63,10 @@ class HomeAksiyaAdapter(val list:ResponseSale, val loading: Boolean,val onClick:
         ItemAksiyaRvBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
 
-    override fun getItemCount() = list.data.size
+    override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list.data[position])
+        holder.bind(list[position])
     }
 
 

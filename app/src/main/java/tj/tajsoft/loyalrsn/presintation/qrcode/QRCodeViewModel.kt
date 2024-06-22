@@ -6,9 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import tj.tajsoft.loyalrsn.data.remote.model.product.user.Card
-import tj.tajsoft.loyalrsn.data.remote.model.product.user.ResponseUser
-import tj.tajsoft.loyalrsn.data.remote.model.product.user.ResponseWithCard
 import tj.tajsoft.loyalrsn.data.remote.model.product.userActive.ResponseUserActive
 import tj.tajsoft.loyalrsn.domain.repo.ProductRepository
 import javax.inject.Inject

@@ -3,243 +3,109 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    tools:ignore="MissingDefaultResource">
 
     <ScrollView
         android:id="@+id/ScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
-            <ImageView
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh_layout"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:src="@drawable/home_background"
+                android:layout_height="220dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardConstraint"
-                android:layout_width="280dp"
-                android:layout_height="163dp"
-                android:layout_marginTop="47dp"
-                app:cardBackgroundColor="#23325C"
-                app:cardCornerRadius="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-                    android:id="@+id/swipe_refresh_layout"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/swipeLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        >
+                        android:layout_height="150dp"
+                        android:src="@drawable/home_background"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <com.google.android.material.divider.MaterialDivider
-                            android:layout_width="0dp"
-                            android:layout_height="6dp"
-                            app:dividerColor="#283E8D"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                    <ru.nikartm.support.ImageBadgeView
+                        android:id="@+id/imageNotification"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="20dp"
+                        android:padding="7dp"
+                        android:src="@drawable/ic_home_page_notification"
+                        app:ibv_badgeColor="#F40202"
+                        app:ibv_badgeLimitValue="false"
+                        app:ibv_badgePadding="0.3dp"
+                        app:ibv_badgePosition="top_right"
+                        app:ibv_badgeTextColor="#ffffff"
+                        app:ibv_badgeTextSize="10sp"
+                        app:ibv_badgeTextStyle="bold"
+                         app:ibv_fixedBadgeRadius="5dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
+                    <ImageView
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
+                        android:layout_marginStart="22dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_home_page"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Rohi Somon"
+                        android:textAllCaps="true"
+                        android:textColor="#23325C"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/viewPagerCard"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:visibility="gone"
-                            android:id="@+id/layoutActiveCard">
-
-                        <TextView
-                            android:id="@+id/countTv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="25dp"
-                            android:layout_marginTop="16dp"
-                            android:fontFamily="@font/montserrat_semibold"
-                            tools:text="26.10"
-                            android:textColor="@color/white"
-                            android:textSize="32dp"
-                            android:textStyle="bold"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/tjsTv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:fontFamily="@font/montserrat_medium"
-                            android:text="TJS"
-                            android:textColor="@color/white"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toTopOf="@id/bonusTv"
-                            app:layout_constraintStart_toEndOf="@id/countTv"
-                            app:layout_constraintTop_toTopOf="@id/countTv" />
-
-                        <TextView
-                            android:id="@+id/bonusTv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:fontFamily="@font/montserrat_medium"
-                            android:text="Бонусов"
-                            android:textColor="#8EA4F3"
-                            android:textSize="10sp"
-                            app:layout_constraintStart_toEndOf="@id/countTv"
-                            app:layout_constraintTop_toBottomOf="@id/tjsTv" />
-
-                        <ImageView
-                            android:id="@+id/QRcode"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginEnd="15dp"
-                            android:padding="10dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_qrcode"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <com.google.android.material.divider.MaterialDivider
-                            android:id="@+id/divider"
-                            android:layout_width="232dp"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="16dp"
-                            app:dividerColor="@color/white"
+                            android:layout_height="170dp"
+                            android:layout_marginTop="50dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/countTv" />
-
-                        <TextView
-                            android:id="@+id/name"
-                            android:layout_width="113dp"
-                            android:layout_height="48dp"
-                            android:layout_marginTop="16dp"
-                            android:fontFamily="@font/montserrat_semibold"
-                            android:maxLines="2"
-                            tools:text="Рустам Ходжибаев"
-                            android:textColor="@color/white"
-                            android:textSize="16sp"
-                            app:layout_constraintStart_toStartOf="@id/divider"
-                            app:layout_constraintTop_toBottomOf="@id/divider" />
-
-                        <TextView
-                            android:id="@+id/idName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_medium"
-                            android:textColor="@color/white"
-                            android:textSize="14sp"
-                            android:layout_marginTop="-3dp"
-                            app:layout_constraintStart_toStartOf="@id/name"
-                            app:layout_constraintTop_toBottomOf="@id/name" />
-
-                        <TextView
-                            android:id="@+id/barakatTV"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="24dp"
-                            android:layout_marginBottom="10dp"
-                            android:fontFamily="@font/montserrat_medium"
-                            tools:text="Баракат"
-                            android:textColor="#F59D47"
-                            android:textSize="12sp"
-                            app:layout_constraintBottom_toBottomOf="@id/idName"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_goneMarginBottom="10dp"
-                            app:layout_goneMarginEnd="24dp" />
-
-                        <TextView
-                            android:id="@+id/statusTv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="40dp"
-                            android:layout_marginBottom="30dp"
-                            android:fontFamily="@font/montserrat_medium"
-                            android:text="Статус"
-                            android:textColor="@color/white"
-                            android:textSize="10sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:id="@+id/layoutDismissCard"
-                            android:visibility="visible"
-
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                android:text="Рохи Сомон"
-                                android:textColor="@color/white"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:layout_marginTop="24dp"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                android:layout_marginStart="-20dp"
-                                android:textSize="24sp"
-                                android:id="@+id/nameDissmis"
-                                />
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                app:layout_constraintStart_toEndOf="@id/nameDissmis"
-                                app:layout_constraintTop_toTopOf="@id/nameDissmis"
-                                app:layout_constraintBottom_toBottomOf="@id/nameDissmis"
-                                android:src="@drawable/ic_lock"
-                                android:layout_marginStart="10dp"
-                                />
-
-                            <com.google.android.material.divider.MaterialDivider
-                                android:id="@+id/dividerDismiss"
-                                android:layout_width="232dp"
-                                android:layout_height="1dp"
-                                android:layout_marginTop="16dp"
-                                app:dividerColor="@color/white"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/nameDissmis" />
-
-                            <TextView
-                                android:layout_width="200dp"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintTop_toBottomOf="@id/dividerDismiss"
-                                app:layout_constraintStart_toStartOf="parent"
-                                android:text="@string/fragment_home_dissmis_text"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                android:textColor="#CDCACA"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:layout_marginTop="10dp"
-                                android:textAlignment="center"
-                                android:textSize="12sp"
-                                />
+                            app:layout_constraintTop_toTopOf="parent" />
+                        />
 
 
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.zhpan.indicator.IndicatorView
+                android:id="@+id/indecator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/swipe_refresh_layout" />
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-            </androidx.cardview.widget.CardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/AIConstraint"
@@ -249,35 +115,34 @@
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toStartOf="@id/DTConstraint"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardConstraint">
+                app:layout_constraintTop_toBottomOf="@id/indecator">
 
 
                 <ProgressBar
                     android:id="@+id/progress_AI"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginRight="10dp"
                     android:indeterminateOnly="false"
-                     android:progressDrawable="@drawable/progressbar_background"
+                    android:progressDrawable="@drawable/progressbar_background"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cardConstraint"
                     tools:ignore="NotSibling"
-                    tools:progress="10"
-                     />
+                    tools:progress="10" />
 
                 <TextView
                     android:id="@+id/countLitr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    tools:text="@string/fragment_home_progress_ai_text"
+                    android:layout_marginTop="30dp"
                     android:textColor="#23325C"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@string/fragment_home_progress_ai_text" />
 
                 <TextView
                     android:id="@+id/AI"
@@ -287,7 +152,7 @@
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="АИ"
                     android:textColor="#4267EB"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@id/countLitr"
                     app:layout_constraintStart_toStartOf="@id/countLitr"
@@ -299,13 +164,13 @@
                     android:layout_height="24dp"
                     android:layout_marginTop="0dp"
                     android:fontFamily="@font/montserrat_medium"
-                    android:text="до авзун 100л"
                     android:textAlignment="center"
                     android:textColor="#4267EB"
-                    android:textSize="10sp"
+                    android:textSize="8sp"
                     app:layout_constraintEnd_toEndOf="@id/countLitr"
                     app:layout_constraintStart_toStartOf="@id/countLitr"
-                    app:layout_constraintTop_toBottomOf="@id/AI" />
+                    app:layout_constraintTop_toBottomOf="@id/AI"
+                    tools:text="@string/home_fragment_title_do_afzun" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -318,19 +183,19 @@
                 android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toStartOf="@id/gazConstraint"
                 app:layout_constraintStart_toEndOf="@id/AIConstraint"
-                app:layout_constraintTop_toBottomOf="@id/cardConstraint">
+                app:layout_constraintTop_toBottomOf="@id/indecator">
 
 
                 <ProgressBar
                     android:id="@+id/progress_DT"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginRight="10dp"
                     android:indeterminateOnly="false"
-                     android:progressDrawable="@drawable/progressbar_background"
+                    android:progressDrawable="@drawable/progressbar_background"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/cardConstraint"
+                    app:layout_constraintTop_toBottomOf="@id/viewPagerCard"
                     tools:ignore="NotSibling"
                     tools:progress="0" />
 
@@ -338,14 +203,14 @@
                     android:id="@+id/countLitrDT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    tools:text="12 л"
+                    android:layout_marginTop="30dp"
                     android:textColor="#23325C"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="12 л" />
 
                 <TextView
                     android:id="@+id/DT"
@@ -355,7 +220,7 @@
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="ДТ"
                     android:textColor="#4267EB"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
 
                     app:layout_constraintEnd_toEndOf="@id/countLitrDT"
@@ -368,14 +233,13 @@
                     android:layout_height="24dp"
                     android:layout_marginTop="0dp"
                     android:fontFamily="@font/montserrat_medium"
-                    android:text="до авзун 50л"
                     android:textAlignment="center"
                     android:textColor="#4267EB"
-                    android:textSize="10sp"
-
+                    android:textSize="8sp"
                     app:layout_constraintEnd_toEndOf="@id/countLitrDT"
                     app:layout_constraintStart_toStartOf="@id/countLitrDT"
-                    app:layout_constraintTop_toBottomOf="@id/DT" />
+                    app:layout_constraintTop_toBottomOf="@id/DT"
+                    tools:text="до авзун 50л" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -388,17 +252,17 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/DTConstraint"
-                app:layout_constraintTop_toBottomOf="@id/cardConstraint">
+                app:layout_constraintTop_toBottomOf="@id/indecator">
 
 
                 <ProgressBar
                     android:id="@+id/progress_GAZ"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginRight="10dp"
                     android:indeterminateOnly="false"
-                     android:progressDrawable="@drawable/progressbar_background"
+                    android:progressDrawable="@drawable/progressbar_background"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cardConstraint"
                     tools:ignore="NotSibling"
@@ -408,14 +272,14 @@
                     android:id="@+id/countLitrGaz"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    tools:text="55 л"
+                    android:layout_marginTop="30dp"
                     android:textColor="#23325C"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="55 л" />
 
                 <TextView
                     android:id="@+id/Gaz"
@@ -425,8 +289,7 @@
                     android:fontFamily="@font/montserrat_semibold"
                     android:text="ГАЗ"
                     android:textColor="#4267EB"
-                    android:textSize="18sp"
-
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@id/countLitrGaz"
                     app:layout_constraintStart_toStartOf="@id/countLitrGaz"
@@ -441,7 +304,7 @@
                     android:text="до авзун 100л"
                     android:textAlignment="center"
                     android:textColor="#4267EB"
-                    android:textSize="10sp"
+                    android:textSize="8sp"
                     app:layout_constraintEnd_toEndOf="@id/countLitrGaz"
                     app:layout_constraintStart_toStartOf="@id/countLitrGaz"
                     app:layout_constraintTop_toBottomOf="@id/Gaz" />
@@ -581,7 +444,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
 
     <include
         android:id="@+id/error"

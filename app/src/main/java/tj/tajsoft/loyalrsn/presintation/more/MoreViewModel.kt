@@ -5,8 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import tj.tajsoft.loyalrsn.data.local.room.entity.userEntity.UserEntity
 import tj.tajsoft.loyalrsn.data.remote.model.product.user.ResponseUser
 import tj.tajsoft.loyalrsn.data.remote.model.product.userActive.ResponseUserActive
 import tj.tajsoft.loyalrsn.domain.repo.ProductRepository
@@ -16,10 +17,9 @@ import javax.inject.Inject
 @HiltViewModel
 class MoreViewModel @Inject constructor(
     private val repo: RegisterRepo,
-    private val repoProductRepository: ProductRepository
-) : ViewModel() {
-    val user = MutableLiveData<ResponseUser>()
-    val userActive = MutableLiveData<ResponseUserActive>()
+    private val productRepo: ProductRepository,
+ ) : ViewModel() {
+    val user = MutableLiveData<List<UserEntity>>()
     val error = MutableLiveData(false)
 
     init {
@@ -36,23 +36,23 @@ class MoreViewModel @Inject constructor(
 
     private fun getUser() = viewModelScope.launch {
         try {
-            val response = repoProductRepository.getUser()
-            user.postValue(response)
+            val response = productRepo.getUserFromLocal()
+            response.let {
+                it.collectLatest {
+                    user.postValue(it)
+                }
+            }
         } catch (e: Exception) {
             Log.d("TAG", "getUserError: $e")
             error.postValue(true)
         }
     }
-
-    fun getUserWithCard() = viewModelScope.launch {
+    fun clearDataBase() = viewModelScope.launch {
         try {
-            val response = repoProductRepository.getUserWithCard()
-            userActive.postValue(response)
-            Log.d("TAG", "getUserWithCard: $response")
+             productRepo.clearDataBase()
         } catch (e: Exception) {
             Log.d("TAG", "getUserErrorCard: $e")
-            error.postValue(true)
-        }
+         }
     }
 
 }

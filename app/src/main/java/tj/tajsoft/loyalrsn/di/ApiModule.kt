@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.create
 import tj.tajsoft.loyalrsn.data.remote.api.auth.RegisterApi
+import tj.tajsoft.loyalrsn.data.remote.api.product.ParentApi
 import tj.tajsoft.loyalrsn.data.remote.api.product.ProductApi
 import javax.inject.Singleton
 
@@ -21,5 +22,9 @@ object ApiModule {
     @Provides
     @Singleton
     fun provideProductApi(retrofit: Retrofit) = retrofit.create(ProductApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideParentApi(retrofit: Retrofit) = retrofit.create(ParentApi::class.java)
 
 }

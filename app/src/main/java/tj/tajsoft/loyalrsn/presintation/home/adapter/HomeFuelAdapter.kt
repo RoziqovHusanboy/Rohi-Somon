@@ -5,14 +5,15 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import tj.tajsoft.loyalrsn.data.local.room.entity.fuel.FuelEntity
 import tj.tajsoft.loyalrsn.data.remote.model.product.fuel.DataFuel
 import tj.tajsoft.loyalrsn.data.remote.model.product.fuel.ResponseFuel
 import tj.tajsoft.loyalrsn.databinding.ItemFuelRecyclerViewBinding
 
-class HomeFuelAdapter(val list: ResponseFuel):RecyclerView.Adapter<HomeFuelAdapter.ViewHolder>() {
+class HomeFuelAdapter(val list: List<FuelEntity>):RecyclerView.Adapter<HomeFuelAdapter.ViewHolder>() {
     inner class ViewHolder(val binding:ItemFuelRecyclerViewBinding):RecyclerView.ViewHolder(binding.root){
         @SuppressLint("UseCompatLoadingForDrawables")
-        fun bind(dataFuel: DataFuel) = with(binding){
+        fun bind(dataFuel: FuelEntity) = with(binding){
             val color = Color.parseColor(dataFuel.backgroundcolor)
             cardLayout.setCardBackgroundColor(color)
             cardText.setCardBackgroundColor(color)
@@ -25,9 +26,9 @@ class HomeFuelAdapter(val list: ResponseFuel):RecyclerView.Adapter<HomeFuelAdapt
         ItemFuelRecyclerViewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
     )
 
-    override fun getItemCount() = list.data.size
+    override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list.data[position])
+        holder.bind(list[position])
      }
 }

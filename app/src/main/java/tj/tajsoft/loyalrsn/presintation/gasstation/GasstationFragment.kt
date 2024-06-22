@@ -6,12 +6,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,7 +37,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
-import tajsoft.demoproject.myapplication.presintation.main.BottomNavigationVisibilityListener
+import tj.tajsoft.loyalrsn.presintation.main.BottomNavigationVisibilityListener
 import tj.tajsoft.loyalrsn.R
 import tj.tajsoft.loyalrsn.data.remote.model.branches.Data
 import tj.tajsoft.loyalrsn.data.remote.model.branches.ResponseBranches
@@ -54,6 +55,8 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
     private var currentLocation: Location? = null
     private var locationLongitute: Double? = null
     private var locationLattitute: Double? = null
+    private var mLocationPermissionGranted: Boolean = false
+    private lateinit var recyclerViewAdapter: GasstationAdapter
 
 
     override fun onCreateView(
@@ -67,6 +70,7 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.maps) as SupportMapFragment
@@ -92,9 +96,24 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
                 SearchLayout.isVisible = true
             }
             viewModel.branches.observe(viewLifecycleOwner) {
-                binding.recyclerview.adapter = GasstationAdapter(it, ::onClick)
+                recyclerViewAdapter = GasstationAdapter(it, ::onClick)
+                binding.recyclerview.adapter = recyclerViewAdapter
             }
+            binding.searchBarOnClick.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
 
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    recyclerViewAdapter.getFilter(s.toString())
+                }
+
+                override fun afterTextChanged(s: Editable?) {}
+            })
 
         }
     }
@@ -117,18 +136,9 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
             )
             == PackageManager.PERMISSION_GRANTED
         ) {
-            myMap.isMyLocationEnabled = true
-            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-                // Move camera to current location
-                if (location != null) {
-                    locationLongitute = location.longitude
-                    locationLattitute = location.latitude
-                    currentLocation = location
-//                    val latLng = LatLng(location.latitude, location.longitude)
-                    myMap.isMyLocationEnabled = true
-//                    myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10f))
-                }
-            }
+            mLocationPermissionGranted = true
+            setupMapWithLocation()
+
         } else {
             // Request location permission
             ActivityCompat.requestPermissions(
@@ -169,7 +179,13 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
                 myMap.animateCamera(moveCamera)
                 marker.tag = data
             }
+
+            if (mLocationPermissionGranted == true) {
+                setupMapWithLocation()
+            }
+
             myMap.setOnMarkerClickListener { clickedMarker ->
+                setupMapWithLocation()
                 val clickedBranch = clickedMarker.tag as ResponseBranches
                 clickedBranch.data.forEach {
                     if (clickedMarker.title == it.title) {
@@ -177,6 +193,19 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
                     }
                 }
                 true
+            }
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun setupMapWithLocation() {
+        myMap.isMyLocationEnabled = true
+        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+            if (location != null) {
+                locationLongitute = location.longitude
+                locationLattitute = location.latitude
+                currentLocation = location
+                myMap.isMyLocationEnabled = true
             }
         }
     }
@@ -236,15 +265,10 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, enable My Location layer and move camera
-                myMap.isMyLocationEnabled = true
-                fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-                    if (location != null) {
-                        val latLng = LatLng(location.latitude, location.longitude)
-                        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
-                    }
-                }
+                setupMapWithLocation()
+                mLocationPermissionGranted = true
             } else {
+                mLocationPermissionGranted = false
                 // Permission denied
                 Toast.makeText(requireContext(), "Location permission denied", Toast.LENGTH_SHORT)
                     .show()
@@ -252,15 +276,6 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun createBitmapFromView(view: View): Bitmap? {
-        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
-        val bitmap =
-            Bitmap.createBitmap(view.measuredWidth, view.measuredHeight, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        view.layout(0, 0, view.measuredWidth, view.measuredHeight)
-        view.draw(canvas)
-        return bitmap
-    }
 
     companion object {
         private const val REQUEST_LOCATION_PERMISSION = 1

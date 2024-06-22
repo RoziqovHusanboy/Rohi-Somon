@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp">
 
@@ -11,17 +12,18 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="centerCrop"
+        android:layout_marginStart="8dp"
         android:src="@color/card_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="65dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
-        android:padding="5dp"
-        android:text="Кофе"
+         tools:text="Терминал"
+        android:textSize="12sp"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView" />

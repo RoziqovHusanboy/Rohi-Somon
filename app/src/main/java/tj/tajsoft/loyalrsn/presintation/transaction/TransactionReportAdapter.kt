@@ -7,10 +7,10 @@ import okhttp3.internal.notifyAll
 import tj.tajsoft.loyalrsn.data.remote.model.product.transaction.ResponseTransaction
 import tj.tajsoft.loyalrsn.databinding.ItemReportRvBinding
 
-class TransactionReportAdapter(val list :List<ResponseTransaction>):RecyclerView.Adapter<TransactionReportAdapter.ViewHolder>() {
+class TransactionReportAdapter(val list :Array<ResponseTransaction>):RecyclerView.Adapter<TransactionReportAdapter.ViewHolder>() {
     inner class ViewHolder(val binding:ItemReportRvBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(item:ResponseTransaction) = with(binding){
-            textViewVidToplivo.text = item.items.last().name
+            textViewVid.text = item.items.last().name
             textViewLitr.text = item.items.last().count
             textViewSumma.text = item.items.last().summa
             textViewBonus.text = item.cashback

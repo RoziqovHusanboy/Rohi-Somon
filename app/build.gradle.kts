@@ -6,6 +6,7 @@ plugins {
     id("androidx.navigation.safeargs")
     id("kotlin-parcelize")
     id("com.google.gms.google-services")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -115,6 +116,18 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     //swipe refreshing
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+    val room_version = "2.6.1"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+//    ksp("androidx.room:room-compiler:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+
+    implementation("androidx.room:room-ktx:2.6.1")
+
+    implementation("io.github.nikartm:image-support:2.0.0")
+    implementation("com.github.zhpanvip:viewpagerindicator:1.2.1")
 
 
 }

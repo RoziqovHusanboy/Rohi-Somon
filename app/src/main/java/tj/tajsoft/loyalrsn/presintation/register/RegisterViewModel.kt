@@ -6,17 +6,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import tj.tajsoft.loyalrsn.data.local.BeforeNumberStore
-import tj.tajsoft.loyalrsn.data.local.NumberStore
-import tj.tajsoft.loyalrsn.data.remote.model.auth.RegisterResponse
+import tj.tajsoft.loyalrsn.data.local.shared_preferance.BeforeNumberStore
+ import tj.tajsoft.loyalrsn.data.remote.model.auth.RegisterResponse
 import tj.tajsoft.loyalrsn.domain.repo.RegisterRepo
 import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     private val registerRepo: RegisterRepo,
-    private val numberStore: NumberStore,
-    private val beforeNumberStore: BeforeNumberStore
+     private val beforeNumberStore: BeforeNumberStore
 ) :ViewModel() {
       val loading = MutableLiveData(false)
       val error = MutableLiveData<Exception>()
@@ -40,15 +38,5 @@ class RegisterViewModel @Inject constructor(
             }
     }
 
-    fun saveNumber() = viewModelScope.launch {
-        try {
-            beforeNumberStore.get()?.let {
-                registerRepo.saveNumber(it)
-            }
-            Log.d("saveNumber", "saveNumberRegister : saved")
 
-        }catch (e:Exception){
-            Log.d("saveNumber", "saveNumber: $e")
-        }
-    }
 }

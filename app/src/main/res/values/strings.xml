@@ -18,4 +18,6 @@
     <string name="fragment_home_progress_ai_text">%s л</string>
     <string name="fragment_home_dissmis_text">Мы приняли вашу заявку и в настоящее время она находится на рассмотрении.</string>
     <string name="item_bottom_sheet_title_desc_password_update">На номер %s был отправлен код-подтвержедния</string>
+    <string name="fragment_multi_card_item_count_fuel">%s л</string>
+    <string name="home_fragment_title_do_afzun">до авзун %s л</string>
 </resources>
