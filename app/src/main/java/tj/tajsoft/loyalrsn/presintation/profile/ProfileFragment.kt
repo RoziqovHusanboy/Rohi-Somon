@@ -58,13 +58,13 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModels.user.observe(viewLifecycleOwner) {
-            binding.numberPhone.text = it.data.phoneNumber
-            binding.nameFio.text = it.data.name
-            binding.nameLocation.text = it.data.city
-            binding.nameCar.text = it.data.carNumber
-            val birth = it.data.birthday.toString()
-            val birthDataOnly = birth.toString().substring(14, 24)
-            binding.nameBirth.text = birthDataOnly
+                binding.numberPhone.text = it.data.first().phoneNumber
+                binding.nameFio.text = it.data.first().name
+                binding.nameLocation.text = it.data.first().city
+                binding.nameCar.text = it.data.first().carNumber
+                val birth = it.data.first().birthday.toString()
+                val birthDataOnly = birth.toString().substring(14, 24)
+                binding.nameBirth.text = birthDataOnly
 
         }
 
@@ -155,7 +155,7 @@ class ProfileFragment : Fragment() {
             ).show()
 
         } catch (e: Exception) {
-            android.util.Log.d("TAG", "onActivityResult: $e")
+             Log.d("TAG", "onActivityResult: $e")
         }
     }
 

@@ -56,18 +56,11 @@ class RegisterOneFragment : Fragment() {
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
             val datePickerDialog = DatePickerDialog(
-                requireContext(), object : DatePickerDialog.OnDateSetListener {
-                    override fun onDateSet(
-                        view: DatePicker?,
-                        year: Int,
-                        month: Int,
-                        dayOfMonth: Int
-                    ) {
-                        val dat = (dayOfMonth.toString() + "." + (month + 1) + "." + (year))
-                        binding.edittextBirth.setText(dat)
-                         updateButtonColor()
-                    }
-
+                requireContext(),
+                { view, year, month, dayOfMonth ->
+                    val dat = (dayOfMonth.toString() + "." + (month + 1) + "." + (year))
+                    binding.edittextBirth.setText(dat)
+                    updateButtonColor()
                 },
                 year,
                 month,
@@ -80,8 +73,6 @@ class RegisterOneFragment : Fragment() {
     private fun showButton() {
         edittextWhatcher(binding.edittextName)
         edittextWhatcher(binding.edittextSecondName)
-
-
     }
 
     @SuppressLint("SuspiciousIndentation")

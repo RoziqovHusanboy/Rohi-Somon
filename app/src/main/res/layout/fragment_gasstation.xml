@@ -85,6 +85,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <EditText
             android:id="@+id/searchBarOnClick"
             android:layout_width="0dp"
@@ -93,14 +94,14 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/fragment_gass_background_edittext"
-            android:hint="Поиск по городу или номер АЗС"
             android:paddingHorizontal="10dp"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@id/recyclerview"
             app:layout_constraintEnd_toStartOf="@id/textViewCancel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textSearchOnclick"
-            app:layout_goneMarginBottom="10dp" />
+            app:layout_goneMarginBottom="10dp"
+            android:hint="Поиск по городу или номер АЗС" />
 
         <TextView
             android:id="@+id/textViewCancel"
@@ -117,9 +118,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="500dp"
             android:layout_marginTop="10dp"
-             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,8 +128,6 @@
             tools:itemCount="5"
             tools:listitem="@layout/item_gasstation_recyclerview" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package tj.tajsoft.loyalrsn.presintation.discount
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -91,6 +92,7 @@ class DetailDiscountFragment:Fragment() {
         viewmodel.sale.observe(viewLifecycleOwner){
             it.data.forEach {
                 if (it.id ==idSale){
+                    Log.d("user", "onViewCreated: $idSale")
                     val constImage = Constant.IMAGE_URL
                     val image = "$constImage${it.img}"
                     Glide.with(binding.root).load(image).listener(object :RequestListener<Drawable>{

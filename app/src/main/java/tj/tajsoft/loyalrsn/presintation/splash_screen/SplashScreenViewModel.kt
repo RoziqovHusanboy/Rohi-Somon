@@ -13,7 +13,7 @@ import javax.inject.Inject
 class SplashScreenViewModel @Inject constructor (
     private val repo: RegisterRepo
 ):ViewModel() {
-    val hasNumber = MutableLiveData<Boolean>( )
+    val hasNumber = MutableLiveData<String?>()
     init {
         hasPhoneNumber()
     }
@@ -21,9 +21,10 @@ class SplashScreenViewModel @Inject constructor (
     private fun hasPhoneNumber() = viewModelScope.launch{
         try {
             val result =  repo.hasPhoneNumber()
+            Log.d("TAG", "hasPhoneNumber: $result")
             hasNumber.postValue(result)
          }catch (e:Exception){
-            Log.d("ExceptionHasNumber", "hasPhoneNumber:$e ")
+            Log.d("ExceptionHasNumber", "hasPhoneNumber:$e")
         }
     }
 

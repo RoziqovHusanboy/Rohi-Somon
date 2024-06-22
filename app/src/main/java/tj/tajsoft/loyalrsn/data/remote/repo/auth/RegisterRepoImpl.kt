@@ -2,13 +2,12 @@ package tj.tajsoft.loyalrsn.data.remote.repo.auth
 
 import android.annotation.SuppressLint
 import android.util.Log
-import tj.tajsoft.loyalrsn.data.local.BeforeNumberStore
-import tj.tajsoft.loyalrsn.data.local.NumberStore
-import tj.tajsoft.loyalrsn.data.local.OtpNumber
-import tj.tajsoft.loyalrsn.data.local.PasswordStore
-import tj.tajsoft.loyalrsn.data.local.TokenStore
-import tj.tajsoft.loyalrsn.data.local.TokenUserStore
-import tj.tajsoft.loyalrsn.data.local.UserIdStore
+import tj.tajsoft.loyalrsn.data.local.shared_preferance.BeforeNumberStore
+import tj.tajsoft.loyalrsn.data.local.shared_preferance.OtpNumber
+import tj.tajsoft.loyalrsn.data.local.shared_preferance.PasswordStore
+import tj.tajsoft.loyalrsn.data.local.shared_preferance.TokenStore
+import tj.tajsoft.loyalrsn.data.local.shared_preferance.TokenUserStore
+import tj.tajsoft.loyalrsn.data.local.shared_preferance.UserIdStore
 import tj.tajsoft.loyalrsn.data.remote.api.auth.RegisterApi
 import tj.tajsoft.loyalrsn.data.remote.model.auth.LogInModel
 import tj.tajsoft.loyalrsn.data.remote.model.auth.LogInResponse
@@ -19,7 +18,6 @@ import javax.inject.Inject
 class RegisterRepoImpl @Inject constructor(
     private val registerApi: RegisterApi,
     private val userIdStore: UserIdStore,
-    private val numberStore: NumberStore,
     private val otpNumber: OtpNumber,
     private val passwordStore: PasswordStore,
     private val tokenStore: TokenStore,
@@ -39,7 +37,7 @@ class RegisterRepoImpl @Inject constructor(
     ): RegisterResponse {
          val pushToken = tokenUserStore.get()!!
          Log.d("TAG", "register: $pushToken")
-         val response = registerApi.register(name, username, phone_number, car_number, email, birthday, gender, password, city, "pushToken")
+         val response = registerApi.register(name, username, phone_number, car_number, email, birthday, gender, password, city, pushToken)
          Log.d("TAG", "registeredUserID: $response")
          userIdStore.set(response.userId.toString())
          Log.d("TAG", "registeredUserID: ${response.userId}")
@@ -47,7 +45,7 @@ class RegisterRepoImpl @Inject constructor(
      }
 
     override suspend fun saveNumber(number: String) {
-        numberStore.set(number)
+        beforeNumberStore.set(number)
      }
 
     override suspend fun saveNumberFromOtpFragment(number: String) {
@@ -67,9 +65,11 @@ class RegisterRepoImpl @Inject constructor(
      }
 
     override suspend fun savePassword(password: String)  = passwordStore.set(password)
-    override suspend fun hasPhoneNumber() :Boolean{
-      return (numberStore.get()!=null)
-    }
+    override suspend fun hasPhoneNumber() :String?{
+        val beforeNumber = beforeNumberStore.get()
+        Log.d("TAG", "hasPhoneNumber: $beforeNumber")
+        return  beforeNumber
+     }
 
     override suspend fun hasUserID(): Boolean {
         return userIdStore.get()!=null
@@ -77,7 +77,7 @@ class RegisterRepoImpl @Inject constructor(
 
     override suspend fun getPassword()  = passwordStore.get()
     override suspend fun clearNumber() {
-        numberStore.clear()
+        beforeNumberStore.clear()
      }
 
     override suspend fun findUserByUsername(username: String): ResponseFindUsername {
@@ -90,6 +90,7 @@ class RegisterRepoImpl @Inject constructor(
 
     override suspend fun logInCheck(password: String): LogInResponse {
         val userName = beforeNumberStore.get()
+        Log.d("logInCheck", "logInCheck: $userName")
         val request = LogInModel("$userName", password)
         val response = registerApi.logInCheck(request)
         tokenStore.set(response.token)

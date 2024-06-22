@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="60dp"
+    android:layout_height="60dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardLayout"
+    app:cardCornerRadius="8dp"
+    android:layout_marginEnd="6dp"
+    app:cardBackgroundColor="#26FF9800"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nameFuel"
+            android:text="A 92"
+            android:textSize="12sp"
+            android:textColor="#F28419"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/countFuel"
+            android:text="@string/fragment_multi_card_item_count_fuel"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="2dp"
+            />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

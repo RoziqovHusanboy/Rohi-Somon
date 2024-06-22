@@ -7,13 +7,13 @@ import tj.tajsoft.loyalrsn.R
 import tj.tajsoft.loyalrsn.data.remote.model.product.transaction.ResponseTransaction
 import tj.tajsoft.loyalrsn.databinding.FragmentTransactionItemTransactionBinding
 
-class TransactionAdapter(val list: ArrayList<ResponseTransaction>) :
+class TransactionAdapter(val list: Array<ResponseTransaction>) :
     RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: FragmentTransactionItemTransactionBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ResponseTransaction) = with(binding) {
-            dataTransaction.text = item.createAdd.date
+            dataTransaction.text = item.createAdd!!.date
             vidToplivoTransaction.text = root.context.getString(
                 R.string.fragment_transaction_item_vid_toplivo_text,
                 item.items.last().name

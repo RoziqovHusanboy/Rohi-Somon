@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import tj.tajsoft.loyalrsn.data.local.room.entity.sale.SaleEntity
 import tj.tajsoft.loyalrsn.data.remote.model.sale.ResponseSale
 import tj.tajsoft.loyalrsn.domain.repo.ProductRepository
 import javax.inject.Inject
@@ -26,7 +28,11 @@ class DiscountViewModel @Inject constructor(
         loading.postValue(true)
         error.postValue(false)
         try {
-            sale.postValue(repo.getSale())
+            val response = repo.getSaleFromDiscount()
+
+                Log.d("repo", "getSale: $response")
+                sale.postValue(response)
+
          }catch (e:Exception){
              loading.postValue(false)
             error.postValue(true)

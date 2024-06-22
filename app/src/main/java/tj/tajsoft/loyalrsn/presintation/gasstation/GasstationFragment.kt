@@ -6,13 +6,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
-import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,9 +26,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
-import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -40,7 +37,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
-import tajsoft.demoproject.myapplication.presintation.main.BottomNavigationVisibilityListener
+import tj.tajsoft.loyalrsn.presintation.main.BottomNavigationVisibilityListener
 import tj.tajsoft.loyalrsn.R
 import tj.tajsoft.loyalrsn.data.remote.model.branches.Data
 import tj.tajsoft.loyalrsn.data.remote.model.branches.ResponseBranches
@@ -58,7 +55,8 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
     private var currentLocation: Location? = null
     private var locationLongitute: Double? = null
     private var locationLattitute: Double? = null
-    private var mLocationPermissionGranted:Boolean = false
+    private var mLocationPermissionGranted: Boolean = false
+    private lateinit var recyclerViewAdapter: GasstationAdapter
 
 
     override fun onCreateView(
@@ -72,6 +70,7 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.maps) as SupportMapFragment
@@ -97,9 +96,24 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
                 SearchLayout.isVisible = true
             }
             viewModel.branches.observe(viewLifecycleOwner) {
-                binding.recyclerview.adapter = GasstationAdapter(it, ::onClick)
+                recyclerViewAdapter = GasstationAdapter(it, ::onClick)
+                binding.recyclerview.adapter = recyclerViewAdapter
             }
+            binding.searchBarOnClick.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
 
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    recyclerViewAdapter.getFilter(s.toString())
+                }
+
+                override fun afterTextChanged(s: Editable?) {}
+            })
 
         }
     }
@@ -166,7 +180,7 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
                 marker.tag = data
             }
 
-            if (mLocationPermissionGranted ==true){
+            if (mLocationPermissionGranted == true) {
                 setupMapWithLocation()
             }
 
@@ -187,14 +201,15 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
     private fun setupMapWithLocation() {
         myMap.isMyLocationEnabled = true
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-             if (location != null) {
+            if (location != null) {
                 locationLongitute = location.longitude
                 locationLattitute = location.latitude
                 currentLocation = location
-                 myMap.isMyLocationEnabled = true
-             }
+                myMap.isMyLocationEnabled = true
+            }
         }
     }
+
     private fun openDialog(newTitle: String, newDesc: String, marker: Marker) {
         val dialog = BottomSheetDialog(requireContext())
         dialog.setContentView(R.layout.item_bottom_sheet)
@@ -260,7 +275,6 @@ class GasstationFragment : Fragment(), OnMapReadyCallback {
             }
         }
     }
-
 
 
     companion object {

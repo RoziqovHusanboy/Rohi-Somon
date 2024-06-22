@@ -8,8 +8,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import tj.tajsoft.loyalrsn.data.local.BeforeNumberStore
-import tj.tajsoft.loyalrsn.data.local.OtpNumber
+import tj.tajsoft.loyalrsn.data.local.shared_preferance.BeforeNumberStore
+import tj.tajsoft.loyalrsn.data.local.shared_preferance.OtpNumber
 import tj.tajsoft.loyalrsn.data.remote.model.auth.LogInResponse
 import tj.tajsoft.loyalrsn.data.remote.model.updataPassword.ResponsePassword
 import tj.tajsoft.loyalrsn.domain.repo.ProductRepository

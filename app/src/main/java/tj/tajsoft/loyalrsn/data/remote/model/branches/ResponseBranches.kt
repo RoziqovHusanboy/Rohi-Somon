@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 data class ResponseBranches(
     @SerializedName("data")
-    val `data`: List<Data>
+    val `data`: ArrayList<Data>
 )

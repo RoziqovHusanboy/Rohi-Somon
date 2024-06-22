@@ -8,6 +8,8 @@ data class Data(
     val birthday: Birthday,
     @SerializedName("car_number")
     val carNumber: String,
+    @SerializedName("card")
+    val card: Card?,
     @SerializedName("city")
     val city: String,
     @SerializedName("class")
@@ -15,23 +17,25 @@ data class Data(
     @SerializedName("email")
     val email: String,
     @SerializedName("fond")
-    val fond: String,
+    val fond: Int,
     @SerializedName("gender")
     val gender: Int,
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")
     val name: String,
-    @SerializedName("parent")
-    val parent: String,
+    @SerializedName("owner")
+    val owner: String,
     @SerializedName("PhoneNumber")
     val phoneNumber: String,
+    @SerializedName("push_badge")
+    val pushBadge: String?,
     @SerializedName("push_token")
     val pushToken: String,
     @SerializedName("r_id")
     val rId: Int,
     @SerializedName("saldo")
-    val saldo: String,
+    val saldo: Int,
     @SerializedName("status")
     val status: String,
     @SerializedName("username")

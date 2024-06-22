@@ -3,9 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:orientation="horizontal"
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,36 +32,125 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:drawableTint="#4F5B7D"
-            android:fontFamily="@font/montserrat_regular"
-            android:text="Вернутся назад"
-            android:textColor="#4F5B7D"
-            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="Штрих код"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageViewQRCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="fitCenter"
-        android:layout_marginTop="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardQRCode"
+        app:cardCornerRadius="12dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/toolBar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolBar" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/imageViewQRCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitCenter"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/imageViewQRCode"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:textColor="@color/card_background"
+                android:id="@+id/textQR"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="10dp"
+                  />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/imageViewQRCode"
+        android:id="@+id/textviewCardType"
+        android:text="TajSoftTj"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/cardQRCode"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
-        android:textSize="18sp"
-        android:textColor="@color/card_background"
-        android:id="@+id/textQR"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/montserrat_semibold"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textviewCount"
+        android:text="10.00"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/textviewCardType"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/montserrat_semibold"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textviewMoney"
+        android:text="cомони"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/textviewCardType"
+        app:layout_constraintStart_toEndOf="@id/textviewCount"
+        android:layout_marginTop="7dp"
+        android:layout_marginStart="2dp"
+         />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_fuel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textviewMoney"
+        tools:itemCount="5"
+        tools:listitem="@layout/qr_transaction_item_fuel_rc" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerview_fuel"
+        tools:itemCount="5"
+        tools:listitem="@layout/qr_transaction_item_count" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,15 +5,15 @@ import com.google.gson.annotations.SerializedName
 
 data class Card(
     @SerializedName("balans")
-    val balans: Double?,
+    val balans: Double,
     @SerializedName("barcode")
-    val barcode: String?,
-    @SerializedName("card_type")
-    val cardType: String?,
+    val barcode: String,
+    @SerializedName("cards_type")
+    val cardsType: String,
     @SerializedName("id")
-    val id: Int?,
+    val id: Int,
     @SerializedName("name")
-    val name: String?,
+    val name: String,
     @SerializedName("status")
-    val status: Int?
+    val status: Int
 )

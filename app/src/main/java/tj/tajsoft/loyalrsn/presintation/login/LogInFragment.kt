@@ -1,11 +1,13 @@
 package tj.tajsoft.loyalrsn.presintation.login
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -39,6 +41,12 @@ class LogInFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //to open automatically keyboard
+        val pinView = binding.pinView
+        pinView.requestFocus()
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(pinView, InputMethodManager.SHOW_IMPLICIT)
+
         binding.textViewforgotPassword.setOnClickListener {
             openDialogOtp()
         }

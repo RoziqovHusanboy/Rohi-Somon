@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="bottom_sheet_peek_height">32dp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_2">2dp</dimen>
 </resources>

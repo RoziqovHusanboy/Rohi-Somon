@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="15dp"
+    android:background="#F6F6F6"
+    tools:ignore="MissingDefaultResource">
+
+    <TextView
+        android:id="@+id/textVid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:text="A91"
+        android:textColor="#F28419"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textLiter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="150 л"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/textVid"
+        app:layout_constraintEnd_toStartOf="@id/textSumma"
+        app:layout_constraintStart_toEndOf="@id/textVid"
+        app:layout_constraintTop_toTopOf="@id/textVid" />
+
+
+    <TextView
+        android:id="@+id/textSumma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="19"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/textVid"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textLiter"
+        app:layout_constraintTop_toTopOf="@id/textVid" />
+
+
+
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="4dp"
+        app:dividerColor="#EEEEEE"
+        app:layout_constraintTop_toBottomOf="@id/textSumma" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

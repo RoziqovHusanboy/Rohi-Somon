@@ -1,8 +1,11 @@
 package tj.tajsoft.loyalrsn.presintation.transaction
 
+import android.app.DatePickerDialog
+import android.icu.util.Calendar
 import android.opengl.Visibility
 import android.os.Bundle
- import android.view.LayoutInflater
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -10,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import tj.tajsoft.loyalrsn.R
 import tj.tajsoft.loyalrsn.databinding.FragmentTransactionBinding
 
 @AndroidEntryPoint
@@ -35,14 +39,36 @@ class TransactionFragment:Fragment() {
         }
 
         UI()
+        openCalendar()
 
+    }
+
+    private fun openCalendar() {
+        binding.imageViewCalendar.setOnClickListener {
+            var date = String()
+
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(
+                requireContext(),
+                { view, year, month, dayOfMonth ->
+                    val dat = (dayOfMonth.toString() + "." + (month + 1) + "." + (year))
+                    date =  dat
+                },
+                year,
+                month,
+                day
+            )
+            datePickerDialog.show()
+        }
     }
 
     private fun UI() {
         viewModel.transaction.observe(viewLifecycleOwner){
-
-            binding.LayoutTransaction.isVisible = it!=null
-            it?: return@observe
+            Log.d("getUser", "UI:$it ")
 
             binding.recyclerViewTransaction.adapter = TransactionAdapter(it)
             binding.recyclerviewReport.adapter = TransactionReportAdapter(it)
